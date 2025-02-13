@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blender.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="%E7%AC%AC1%E7%AB%A0%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB-%E2%80%93-blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E9%AD%85%E5%8A%9B%E3%81%A8%E5%8F%AF%E8%83%BD%E6%80%A7"><strong>第1章：はじめに – Blenderアドオン開発の魅力と可能性</strong></h3>
+<p>Blenderは、オープンソースの3D制作ソフトとして世界中のクリエイターに愛されています。モデリング、アニメーション、レンダリング、VFXなど、多岐にわたる機能を備えている一方で、標準機能だけではカバーしきれない作業もあります。そこで活躍するのが「Blenderアドオン」です。</p>
+<p>アドオンを開発すれば、<strong>作業を自動化</strong>したり、<strong>新しい機能を追加</strong>したり、<strong>Blenderを自分好みにカスタマイズ</strong>することができます。<br>
+特に、スクリプトやプラグイン開発の経験がなくても、Pythonを使えば比較的簡単にアドオンを作成できます。</p>
+<p>このシリーズでは、<strong>Blenderアドオンの開発から公開、収益化までの全プロセス</strong>を徹底解説します。<br>
+初心者の方でもゼロから学び、最終的には<strong>自作アドオンを世界に向けて公開する</strong>ことができるようになります。</p>
+<hr>
+<h3 id="11-blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%A8%E3%81%AF"><strong>1.1 Blenderアドオンとは？</strong></h3>
+<p>Blenderアドオンとは、Pythonで作成されたスクリプト（プラグイン）で、Blenderの機能を拡張するためのものです。<br>
+例えば、以下のような用途で活用されています。</p>
+<ul>
+<li><strong>操作の自動化</strong>：面倒な手順をワンクリックで実行</li>
+<li><strong>新しいツールの追加</strong>：オリジナルのモデリングツールやリギング機能の実装</li>
+<li><strong>カスタムUIの作成</strong>：BlenderのUIを自分好みにカスタマイズ</li>
+<li><strong>ワークフローの改善</strong>：制作のスピードアップや効率化</li>
+</ul>
+<p>Blenderには標準でも数多くのアドオンが搭載されており、<code>編集 &gt; プリファレンス &gt; アドオン</code> から有効化できます。<br>
+ただし、特定の用途に特化したアドオンは自作するのが最も理想的です。</p>
+<hr>
+<h3 id="12-blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E9%AD%85%E5%8A%9B"><strong>1.2 Blenderアドオン開発の魅力</strong></h3>
+<p>Blenderアドオンを開発することで、単なる3Dアーティストやアニメーターとしてだけでなく、<strong>クリエイター兼プログラマー</strong>としてのスキルを身につけることができます。<br>
+以下のようなメリットがあります。</p>
+<h4 id="%E2%91%A0-%E8%87%AA%E5%88%86%E3%81%AE%E4%BD%9C%E6%A5%AD%E3%82%92%E5%8A%B9%E7%8E%87%E5%8C%96%E3%81%A7%E3%81%8D%E3%82%8B"><strong>① 自分の作業を効率化できる</strong></h4>
+<p>手作業で何十回も繰り返している作業を、<strong>1クリックで自動化</strong>できたらどうでしょうか？<br>
+例えば、以下のような操作はPythonスクリプトを使えば簡単に自動化できます。</p>
+<ul>
+<li>すべてのオブジェクトを自動でリネーム</li>
+<li>一定間隔でオブジェクトを配置</li>
+<li>シーン内の不要なデータを削除して軽量化</li>
+</ul>
+<p>アドオン開発を学ぶことで、<strong>Blenderを自分専用のツールに進化させる</strong>ことができます。</p>
+<h4 id="%E2%91%A1-%E4%BB%96%E3%81%AEblender%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%A8%E5%85%B1%E6%9C%89%E3%81%A7%E3%81%8D%E3%82%8B"><strong>② 他のBlenderユーザーと共有できる</strong></h4>
+<p>自作のアドオンを<strong>GitHub</strong>や<strong>Blender Market</strong>で公開すれば、世界中のBlenderユーザーと共有できます。<br>
+特に、Blenderはオープンソースの文化が根付いており、無料アドオンの配布も盛んです。<br>
+優れたアドオンを開発すれば、コミュニティ内で注目を集め、多くのユーザーに使ってもらえるチャンスがあります。</p>
+<h4 id="%E2%91%A2-%E5%8F%8E%E7%9B%8A%E5%8C%96%E3%81%8C%E5%8F%AF%E8%83%BD"><strong>③ 収益化が可能</strong></h4>
+<p>Blenderアドオンは無料公開するだけでなく、<strong>有料販売</strong>することもできます。<br>
+例えば、以下のような販売プラットフォームを活用できます。</p>
+<ul>
+<li><strong>Blender Market</strong>（公式マーケット）</li>
+<li><strong>Gumroad</strong>（個人販売向け）</li>
+<li><strong>BOOTH</strong>（日本向け）</li>
+<li><strong>Patreon / Fanbox</strong>（継続的支援）</li>
+</ul>
+<p>実際に、Blender Marketでは<strong>数千ドル以上の売上を出しているアドオン</strong>も珍しくありません。<br>
+特に、プロ向けの高度なツールを開発すれば、<strong>安定した収益源</strong>になる可能性があります。</p>
+<hr>
+<h3 id="13-python%E3%82%92%E4%BD%BF%E3%81%86%E7%90%86%E7%94%B1"><strong>1.3 Pythonを使う理由</strong></h3>
+<p>Blenderアドオンの開発には、プログラミング言語「Python」を使用します。<br>
+Pythonは<strong>初心者でも学びやすく、簡潔な文法が特徴</strong>です。</p>
+<pre class="hljs"><code><div>print(<span class="hljs-string">"Hello, Blender!"</span>)
+</div></code></pre>
+<p>この1行のコードを実行するだけで、BlenderのPythonコンソールに「Hello, Blender!」と表示されます。</p>
+<p>また、PythonはBlender内部のデータを直接操作できるAPI（<code>bpy</code>）を備えており、以下のような処理が可能です。</p>
+<ul>
+<li>シーン内のオブジェクトを取得・変更する</li>
+<li>カスタムツールを追加する</li>
+<li>Blenderのインターフェースを改変する</li>
+</ul>
+<p>Pythonの基本がわかれば、すぐにアドオン開発に取り組めるので、<strong>これからプログラミングを学ぶ人にも最適</strong>です。</p>
+<hr>
+<h3 id="14-blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E6%B5%81%E3%82%8C"><strong>1.4 Blenderアドオン開発の流れ</strong></h3>
+<p>このシリーズでは、以下の流れでアドオン開発を進めます。</p>
+<ol>
+<li><strong>環境構築</strong>（Pythonの基礎、Blenderのスクリプトエディタの使い方）</li>
+<li><strong>基本的なアドオンの作成</strong>（フォルダ構成、<code>bl_info</code>の設定、<code>register()</code> の仕組み）</li>
+<li><strong>オペレーターとパネルの作成</strong>（新しいボタンや機能の追加）</li>
+<li><strong>データの管理</strong>（オブジェクトの操作、カスタムプロパティ）</li>
+<li><strong>UIの拡張</strong>（カスタムメニュー、リスト、スライダーの作成）</li>
+<li><strong>テストとデバッグ</strong>（エラーハンドリング、開発効率を上げる方法）</li>
+<li><strong>アドオンの配布・公開</strong>（GitHub、Blender Market、BOOTHなど）</li>
+<li><strong>収益化の戦略</strong>（無料配布 vs 有料販売、マーケティングのポイント）</li>
+</ol>
+<p>最終的には、自分のアドオンを世界中に公開し、Blenderユーザーに役立つツールを作ることを目指します。</p>
+<hr>
+<h3 id="15-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>1.5 次回予告</strong></h3>
+<p>次回は <strong>「Blenderアドオンの基本構造とPythonの基礎」</strong> を解説します。<br>
+実際にアドオンのフォルダ構成を作りながら、最初のスクリプトを実行してみましょう。</p>
+<p>Blenderをさらに便利にする「自分だけのツール」を作る旅へ、さっそく出発しましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC2%E7%AB%A0blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0%E3%81%A8python%E3%81%AE%E5%9F%BA%E7%A4%8E"><strong>第2章：Blenderアドオンの基本構造とPythonの基礎</strong></h3>
+<p>前回の記事では、Blenderアドオンの魅力や可能性について紹介しました。<br>
+今回から実際に<strong>アドオンを作るための基礎知識</strong>を学び、最初のアドオンを作成してみましょう。</p>
+<p>この章では、以下のポイントを解説します。</p>
+<ul>
+<li><strong>Blenderアドオンのフォルダ構成</strong></li>
+<li><strong>アドオンの必須ファイル <code>__init__.py</code> の書き方</strong></li>
+<li><strong><code>bl_info</code> とは？</strong></li>
+<li><strong><code>register()</code> / <code>unregister()</code> の仕組み</strong></li>
+<li><strong>Pythonの基礎とBlender APIの簡単な使い方</strong></li>
+</ul>
+<hr>
+<h2 id="21-blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E6%A7%8B%E6%88%90"><strong>2.1 Blenderアドオンのフォルダ構成</strong></h2>
+<p>Blenderのアドオンは、<strong>Pythonのスクリプト（<code>.py</code>）として作成</strong>されます。<br>
+基本的には以下の2つの方法でアドオンを作ることができます。</p>
+<ol>
+<li>
+<p><strong>単一のPythonファイル</strong></p>
+<ul>
+<li>小規模なアドオンや簡単なスクリプト向け</li>
+<li>1つの <code>.py</code> ファイルとして作成</li>
+</ul>
+</li>
+<li>
+<p><strong>フォルダ構成のパッケージ型</strong></p>
+<ul>
+<li>機能が多い場合や複数のファイルを扱う場合に適用</li>
+<li><code>__init__.py</code> を含むフォルダ形式で作成</li>
+</ul>
+</li>
+</ol>
+<p>シンプルなアドオンなら、Pythonファイル1つでも動作しますが、<strong>今後の拡張を考えるとフォルダ構成の方が管理しやすい</strong>です。<br>
+Blenderの標準アドオンもフォルダ型を採用しているため、本格的に開発するならフォルダ構成を選ぶのがベストです。</p>
+<p><strong>標準的なフォルダ構成（推奨）</strong></p>
+<pre class="hljs"><code><div>my_addon/               ← アドオンのフォルダ（任意の名前）
+ ├── __init__.py        ← アドオンのエントリーポイント（必須）
+ ├── operators.py       ← 操作（オペレーター）を定義
+ ├── ui.py              ← UI（パネルやメニュー）を定義
+ ├── utils.py           ← 汎用関数やヘルパー関数を定義
+ └── icons/             ← カスタムアイコンを格納（必要なら）
+</div></code></pre>
+<p>アドオンのフォルダは<strong>Pythonのモジュール（パッケージ）として機能</strong>するため、<code>__init__.py</code> を必ず作成します。<br>
+これにより、フォルダごとBlenderに認識させることができます。</p>
+<hr>
+<h2 id="22-initpy-%E3%81%AE%E5%9F%BA%E6%9C%AC"><strong>2.2 <code>__init__.py</code> の基本</strong></h2>
+<p><code>__init__.py</code> はアドオンの<strong>エントリーポイント</strong>であり、Blenderがアドオンを読み込む際に最初に実行されます。<br>
+最低限、以下の要素を含める必要があります。</p>
+<ul>
+<li><strong>アドオンの情報 (<code>bl_info</code>)</strong></li>
+<li><strong>アドオンの登録 (<code>register()</code>)</strong></li>
+<li><strong>アドオンの解除 (<code>unregister()</code>)</strong></li>
+</ul>
+<p>実際のコード例を見てみましょう。</p>
+<pre class="hljs"><code><div>bl_info = {
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"My First Addon"</span>,
+    <span class="hljs-string">"author"</span>: <span class="hljs-string">"あなたの名前"</span>,
+    <span class="hljs-string">"version"</span>: (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>),
+    <span class="hljs-string">"blender"</span>: (<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>),
+    <span class="hljs-string">"location"</span>: <span class="hljs-string">"View3D &gt; Tool Shelf"</span>,
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"Blenderにボタンを追加するシンプルなアドオン"</span>,
+    <span class="hljs-string">"category"</span>: <span class="hljs-string">"Object"</span>,
+}
+
+<span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    print(<span class="hljs-string">"My First Addon が有効になりました"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    print(<span class="hljs-string">"My First Addon が無効になりました"</span>)
+</div></code></pre>
+<h3 id="blinfo-%E3%81%AE%E5%90%84%E9%A0%85%E7%9B%AE"><strong>bl_info の各項目</strong></h3>
+<p><code>bl_info</code> は、Blenderのアドオン一覧に表示される**メタデータ（基本情報）**を定義します。</p>
+<ul>
+<li><strong><code>name</code></strong> → アドオンの名前（Blenderのアドオンリストで表示される）</li>
+<li><strong><code>author</code></strong> → 開発者の名前</li>
+<li><strong><code>version</code></strong> → アドオンのバージョン（<code>(major, minor, patch)</code> の形式）</li>
+<li><strong><code>blender</code></strong> → 対応するBlenderのバージョン</li>
+<li><strong><code>location</code></strong> → アドオンが追加される場所（例: 「3Dビューのツールシェルフ」）</li>
+<li><strong><code>description</code></strong> → アドオンの説明（簡潔に）</li>
+<li><strong><code>category</code></strong> → カテゴリー（Object、Mesh、Renderなど）</li>
+</ul>
+<p>この <code>bl_info</code> を正しく記述しないと、アドオンが正しく認識されないので注意しましょう。</p>
+<hr>
+<h2 id="23-register--unregister-%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF"><strong>2.3 <code>register()</code> / <code>unregister()</code> の仕組み</strong></h2>
+<p>Blenderのアドオンは、ユーザーが「有効化」すると <code>register()</code> が実行され、「無効化」すると <code>unregister()</code> が実行されます。</p>
+<h3 id="register-%E3%81%AE%E5%BD%B9%E5%89%B2"><strong>register() の役割</strong></h3>
+<ul>
+<li>必要なオペレーター（機能）やパネル（UI）を登録</li>
+<li>イベントハンドラーを設定</li>
+<li>カスタムプロパティを定義</li>
+</ul>
+<h3 id="unregister-%E3%81%AE%E5%BD%B9%E5%89%B2"><strong>unregister() の役割</strong></h3>
+<ul>
+<li>すべての登録を解除</li>
+<li>追加したカスタムプロパティを削除</li>
+</ul>
+<p>以下のように、<code>register()</code> で追加したものは、<code>unregister()</code> で必ず解除するのが基本です。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""サンプルオペレーター"""</span>
+    bl_idname = <span class="hljs-string">"object.my_operator"</span>
+    bl_label = <span class="hljs-string">"My Operator"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        print(<span class="hljs-string">"ボタンが押されました！"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(MyOperator)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(MyOperator)
+</div></code></pre>
+<p><strong>ポイント</strong></p>
+<ul>
+<li><code>bpy.utils.register_class(MyOperator)</code> でオペレーターを登録</li>
+<li><code>bpy.utils.unregister_class(MyOperator)</code> で解除（しないとエラーが出る）</li>
+</ul>
+<hr>
+<h2 id="24-python%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%A8blender-api%E3%81%AE%E7%B0%A1%E5%8D%98%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9"><strong>2.4 Pythonの基礎とBlender APIの簡単な使い方</strong></h2>
+<p>Blenderアドオン開発ではPythonの基本的な文法を知っておく必要があります。</p>
+<h3 id="%E2%91%A0-%E5%A4%89%E6%95%B0%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E5%9E%8B"><strong>① 変数とデータ型</strong></h3>
+<p>Pythonの基本的なデータ型は以下のようになります。</p>
+<pre class="hljs"><code><div>num = <span class="hljs-number">10</span>        <span class="hljs-comment"># 整数</span>
+text = <span class="hljs-string">"Blender"</span>  <span class="hljs-comment"># 文字列</span>
+flag = <span class="hljs-literal">True</span>     <span class="hljs-comment"># 真偽値</span>
+</div></code></pre>
+<h3 id="%E2%91%A1-%E9%96%A2%E6%95%B0%E3%81%AE%E5%AE%9A%E7%BE%A9"><strong>② 関数の定義</strong></h3>
+<p>関数を作成すると、処理をまとめて簡単に再利用できます。</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">greet</span><span class="hljs-params">()</span>:</span>
+    print(<span class="hljs-string">"こんにちは！Blenderアドオン開発へようこそ"</span>)
+
+greet()  <span class="hljs-comment"># 関数を呼び出す</span>
+</div></code></pre>
+<h3 id="%E2%91%A2-blender-api%E3%81%AE%E5%9F%BA%E6%9C%AC"><strong>③ Blender APIの基本</strong></h3>
+<p>Blenderでは <code>bpy</code> モジュールを使って内部データにアクセスできます。</p>
+<h4 id="%E7%8F%BE%E5%9C%A8%E3%81%AE%E3%82%B7%E3%83%BC%E3%83%B3%E3%81%AE%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E4%B8%80%E8%A6%A7%E3%82%92%E5%8F%96%E5%BE%97"><strong>現在のシーンのオブジェクト一覧を取得</strong></h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects:
+    print(obj.name)
+</div></code></pre>
+<h4 id="%E6%96%B0%E3%81%97%E3%81%84%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%96%E3%82%92%E8%BF%BD%E5%8A%A0"><strong>新しいキューブを追加</strong></h4>
+<pre class="hljs"><code><div>bpy.ops.mesh.primitive_cube_add()
+</div></code></pre>
+<h4 id="%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BD%8D%E7%BD%AE%E3%82%92%E5%A4%89%E6%9B%B4"><strong>オブジェクトの位置を変更</strong></h4>
+<pre class="hljs"><code><div>bpy.context.object.location.x += <span class="hljs-number">2</span>
+</div></code></pre>
+<p>このように <code>bpy</code> を使うことで、<strong>Blender内部のデータやオブジェクトを直接操作</strong>できます。</p>
+<hr>
+<h2 id="25-%E3%81%BE%E3%81%A8%E3%82%81"><strong>2.5 まとめ</strong></h2>
+<p>この章では、Blenderアドオンの基本的な構造とPythonの基礎を学びました。</p>
+<ul>
+<li>アドオンは <strong><code>__init__.py</code> を含むフォルダ</strong> で作成する</li>
+<li><code>bl_info</code> で <strong>アドオンの情報</strong> を定義する</li>
+<li><code>register()</code> で <strong>機能を登録し、unregister() で解除</strong> する</li>
+<li><code>bpy</code> モジュールを使えば <strong>Blenderのデータを操作</strong> できる</li>
+</ul>
+<hr>
+<h2 id="26-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>2.6 次回予告</strong></h2>
+<p>次回は、**「オペレーター（Operator）を作成し、ボタンを追加する方法」**を解説します。<br>
+実際にBlenderに新しいボタンを作り、クリックすると何かが起こるアドオンを作ってみましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC3%E7%AB%A0%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BCoperator%E3%82%92%E4%BD%9C%E6%88%90%E3%81%97%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B"><strong>第3章：オペレーター（Operator）を作成し、ボタンを追加する</strong></h3>
+<p>前回の記事では、Blenderアドオンの基本構造やPythonの基礎、<code>register()</code> と <code>unregister()</code> の仕組みを学びました。<br>
+今回からは実際に <strong>Blenderに新しいボタン（オペレーター）を追加</strong> して、アドオンとしての形を作っていきます。</p>
+<p>この章では、以下の内容を解説します。</p>
+<ul>
+<li><strong>オペレーター（Operator）とは？</strong></li>
+<li><strong>オペレーターの基本構造</strong></li>
+<li><strong>ボタンを3Dビューに追加</strong></li>
+<li><strong>オペレーターの実用例</strong></li>
+<li><strong>ショートカットキーの登録</strong></li>
+</ul>
+<hr>
+<h2 id="31-%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BCoperator%E3%81%A8%E3%81%AF"><strong>3.1 オペレーター（Operator）とは？</strong></h2>
+<p>Blenderにおける「オペレーター」とは、ユーザーが <strong>ボタンやショートカットキーを押したときに実行される処理</strong> のことです。</p>
+<p>例えば、以下のような操作はすべて「オペレーター」として実装されています。</p>
+<ul>
+<li><strong>オブジェクトの追加</strong> (<code>bpy.ops.mesh.primitive_cube_add()</code>)</li>
+<li><strong>オブジェクトの移動・回転</strong> (<code>bpy.ops.transform.translate()</code>)</li>
+<li><strong>レンダリングの実行</strong> (<code>bpy.ops.render.render()</code>)</li>
+<li><strong>エクスポート</strong> (<code>bpy.ops.export_scene.obj()</code>)</li>
+</ul>
+<p>これらのオペレーターは <strong><code>bpy.ops</code></strong> の中に定義されており、Pythonスクリプトから直接呼び出すことができます。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-comment"># キューブを追加するオペレーターを実行</span>
+bpy.ops.mesh.primitive_cube_add()
+</div></code></pre>
+<p>Blenderの標準オペレーターだけでなく、<strong>自分でオリジナルのオペレーターを作成することも可能</strong> です。</p>
+<hr>
+<h2 id="32-%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0"><strong>3.2 オペレーターの基本構造</strong></h2>
+<p>オペレーターを作成するには、<code>bpy.types.Operator</code> を継承したクラスを定義し、<br>
+<code>execute()</code> メソッドの中に処理を書きます。</p>
+<h3 id="%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E4%BE%8B"><strong>シンプルなオペレーターの例</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""オペレーターの説明（ツールチップに表示される）"""</span>
+    bl_idname = <span class="hljs-string">"object.simple_operator"</span>  <span class="hljs-comment"># 一意の識別子（カテゴリー.名前）</span>
+    bl_label = <span class="hljs-string">"シンプルなボタン"</span>  <span class="hljs-comment"># UI上に表示されるラベル</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        <span class="hljs-comment"># ここにオペレーターの処理を書く</span>
+        print(<span class="hljs-string">"ボタンが押されました！"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}  <span class="hljs-comment"># 成功時の戻り値</span>
+</div></code></pre>
+<p><strong>オペレーターを作成する際のポイント</strong></p>
+<ul>
+<li><strong><code>bl_idname</code></strong> → 一意の識別子（&quot;カテゴリー.オペレーター名&quot; の形式）</li>
+<li><strong><code>bl_label</code></strong> → UIに表示される名前</li>
+<li><strong><code>execute(self, context)</code></strong> → ボタンが押されたときに実行される処理</li>
+</ul>
+<h3 id="register-%E3%81%AB%E8%BF%BD%E5%8A%A0"><strong>register() に追加</strong></h3>
+<p>オペレーターを作成したら、<code>register()</code> で登録し、<code>unregister()</code> で解除する必要があります。</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(SimpleOperator)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(SimpleOperator)
+</div></code></pre>
+<p>この状態でBlenderのPythonコンソールから以下のようにオペレーターを実行できます。</p>
+<pre class="hljs"><code><div>bpy.ops.object.simple_operator()
+</div></code></pre>
+<hr>
+<h2 id="33-3d%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AB%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E8%BF%BD%E5%8A%A0"><strong>3.3 3Dビューにボタンを追加</strong></h2>
+<p>オペレーターを作成しただけでは、ユーザーがGUIから実行できません。<br>
+そこで、<strong>3Dビューのツールシェルフにボタンを追加</strong> してみましょう。</p>
+<h3 id="%E3%83%91%E3%83%8D%E3%83%AB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%97%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E8%BF%BD%E5%8A%A0"><strong>パネルを作成し、ボタンを追加</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""オペレーターの説明"""</span>
+    bl_idname = <span class="hljs-string">"object.simple_operator"</span>
+    bl_label = <span class="hljs-string">"シンプルなボタン"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        print(<span class="hljs-string">"ボタンが押されました！"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimplePanel</span><span class="hljs-params">(bpy.types.Panel)</span>:</span>
+    <span class="hljs-string">"""3Dビューにボタンを追加するパネル"""</span>
+    bl_label = <span class="hljs-string">"カスタムツール"</span>
+    bl_idname = <span class="hljs-string">"VIEW3D_PT_custom_tools"</span>
+    bl_space_type = <span class="hljs-string">'VIEW_3D'</span>
+    bl_region_type = <span class="hljs-string">'UI'</span>
+    bl_category = <span class="hljs-string">"ツール"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        layout.operator(<span class="hljs-string">"object.simple_operator"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(SimpleOperator)
+    bpy.utils.register_class(SimplePanel)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(SimpleOperator)
+    bpy.utils.unregister_class(SimplePanel)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<p><strong>ポイント</strong></p>
+<ul>
+<li><code>bl_space_type = 'VIEW_3D'</code> → <strong>3DビューのUIに表示</strong></li>
+<li><code>bl_region_type = 'UI'</code> → <strong>サイドバーに配置</strong></li>
+<li><code>bl_category = &quot;ツール&quot;</code> → <strong>タブの名前</strong></li>
+<li><code>layout.operator(&quot;object.simple_operator&quot;)</code> → <strong>ボタンを追加</strong></li>
+</ul>
+<p><strong>実行方法</strong></p>
+<ol>
+<li>スクリプトをBlenderのテキストエディターで実行</li>
+<li><strong>「ツール」タブを開くと「シンプルなボタン」が表示される</strong></li>
+<li>ボタンをクリックすると、コンソールに <code>ボタンが押されました！</code> と表示される</li>
+</ol>
+<hr>
+<h2 id="34-%E5%AE%9F%E7%94%A8%E7%9A%84%E3%81%AA%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC"><strong>3.4 実用的なオペレーター</strong></h2>
+<p>次に、<strong>実用的なオペレーター</strong> を作成してみましょう。<br>
+例えば、「選択したオブジェクトをX方向に2m移動する」オペレーターを作ります。</p>
+<h3 id="%E9%81%B8%E6%8A%9E%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC"><strong>選択オブジェクトを移動するオペレーター</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MoveObjectOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""選択オブジェクトを移動"""</span>
+    bl_idname = <span class="hljs-string">"object.move_x"</span>
+    bl_label = <span class="hljs-string">"X軸に2m移動"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        obj = context.object  <span class="hljs-comment"># アクティブなオブジェクトを取得</span>
+        <span class="hljs-keyword">if</span> obj:
+            obj.location.x += <span class="hljs-number">2</span>
+            self.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"オブジェクトを移動しました"</span>)
+        <span class="hljs-keyword">else</span>:
+            self.report({<span class="hljs-string">'WARNING'</span>}, <span class="hljs-string">"オブジェクトを選択してください"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+</div></code></pre>
+<p>このオペレーターを登録し、パネルにボタンを追加すると、クリックするだけで選択オブジェクトがX方向に2m移動するようになります。</p>
+<hr>
+<h2 id="35-%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%82%AD%E3%83%BC%E3%81%AE%E7%99%BB%E9%8C%B2"><strong>3.5 ショートカットキーの登録</strong></h2>
+<p>Blenderでは、オペレーターに<strong>ショートカットキーを割り当てる</strong> こともできます。</p>
+<h3 id="%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%82%AD%E3%83%BC%E3%82%92%E7%99%BB%E9%8C%B2"><strong>ショートカットキーを登録</strong></h3>
+<pre class="hljs"><code><div>addon_keymaps = []
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(MoveObjectOperator)
+
+    wm = bpy.context.window_manager
+    km = wm.keyconfigs.addon.keymaps.new(name=<span class="hljs-string">"3D View"</span>, space_type=<span class="hljs-string">"VIEW_3D"</span>)
+    kmi = km.keymap_items.new(<span class="hljs-string">"object.move_x"</span>, type=<span class="hljs-string">'M'</span>, value=<span class="hljs-string">'PRESS'</span>, ctrl=<span class="hljs-literal">True</span>)
+    addon_keymaps.append((km, kmi))
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(MoveObjectOperator)
+
+    <span class="hljs-keyword">for</span> km, kmi <span class="hljs-keyword">in</span> addon_keymaps:
+        km.keymap_items.remove(kmi)
+    addon_keymaps.clear()
+</div></code></pre>
+<p>このコードを追加すると、 <strong><code>Ctrl + M</code></strong> でオブジェクトをX方向に2m移動できるようになります。</p>
+<hr>
+<h2 id="36-%E3%81%BE%E3%81%A8%E3%82%81"><strong>3.6 まとめ</strong></h2>
+<p>この章では、オペレーターの作成方法と、ボタン・ショートカットキーの登録方法を学びました。</p>
+<ul>
+<li><code>bpy.types.Operator</code> を継承してオペレーターを作成</li>
+<li><code>execute()</code> の中で処理を実装</li>
+<li><code>layout.operator()</code> でボタンをUIに追加</li>
+<li>ショートカットキーを登録し、素早くオペレーターを実行可能にする</li>
+</ul>
+<hr>
+<h2 id="37-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>3.7 次回予告</strong></h2>
+<p>次回は <strong>「BlenderのUIをカスタマイズし、パネルやメニューを作成する方法」</strong> を解説します！<br>
+さらに使いやすいアドオンを作るため、UI設計の基本を学びましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC4%E7%AB%A0blender%E3%81%AEui%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%97%E3%83%91%E3%83%8D%E3%83%AB%E3%82%84%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B"><strong>第4章：BlenderのUIをカスタマイズし、パネルやメニューを作成する</strong></h3>
+<p>前回は <strong>オペレーター（Operator）</strong> を作成し、3Dビューにボタンを追加しました。<br>
+今回は <strong>BlenderのUIをカスタマイズ</strong> し、より使いやすいインターフェースを作成する方法を解説します。</p>
+<p>この章では、以下の内容を学びます。</p>
+<ul>
+<li><strong>BlenderのUIの基本構造</strong></li>
+<li><strong>パネル（Panel）の作成</strong></li>
+<li><strong>カスタムメニューの追加</strong></li>
+<li><strong>リスト表示（UIList）の活用</strong></li>
+<li><strong>UIのデザインとユーザビリティの向上</strong></li>
+</ul>
+<hr>
+<h2 id="41-blender%E3%81%AEui%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0"><strong>4.1 BlenderのUIの基本構造</strong></h2>
+<p>BlenderのUIは、<strong>スペース（space）とリージョン（region）</strong> に分かれています。</p>
+<table>
+<thead>
+<tr>
+<th>UI要素</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>スペース (<code>bl_space_type</code>)</strong></td>
+<td>どのエリアに表示するか（例: <code>VIEW_3D</code>, <code>PROPERTIES</code>）</td>
+</tr>
+<tr>
+<td><strong>リージョン (<code>bl_region_type</code>)</strong></td>
+<td>どの部分に表示するか（例: <code>UI</code>, <code>TOOLS</code>, <code>HEADER</code>）</td>
+</tr>
+<tr>
+<td><strong>カテゴリー (<code>bl_category</code>)</strong></td>
+<td>サイドバーのタブ名（3Dビュー用）</td>
+</tr>
+<tr>
+<td><strong>パネル (<code>bpy.types.Panel</code>)</strong></td>
+<td>UIを構成する基本単位</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="42-%E3%83%91%E3%83%8D%E3%83%ABpanel%E3%81%AE%E4%BD%9C%E6%88%90"><strong>4.2 パネル（Panel）の作成</strong></h2>
+<h3 id="421-3d%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AB%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%91%E3%83%8D%E3%83%AB%E3%82%92%E8%BF%BD%E5%8A%A0"><strong>4.2.1 3Dビューにカスタムパネルを追加</strong></h3>
+<p>まず、3Dビューの<strong>サイドバー（ツールシェルフ）</strong> に新しいタブを作成し、オペレーターを追加してみましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomPanel</span><span class="hljs-params">(bpy.types.Panel)</span>:</span>
+    <span class="hljs-string">"""3Dビューにカスタムパネルを追加"""</span>
+    bl_label = <span class="hljs-string">"カスタムツール"</span>  <span class="hljs-comment"># パネルタイトル</span>
+    bl_idname = <span class="hljs-string">"VIEW3D_PT_custom_tools"</span>
+    bl_space_type = <span class="hljs-string">'VIEW_3D'</span>  <span class="hljs-comment"># 3Dビューに表示</span>
+    bl_region_type = <span class="hljs-string">'UI'</span>  <span class="hljs-comment"># サイドバー（Nパネル）</span>
+    bl_category = <span class="hljs-string">"ツール"</span>  <span class="hljs-comment"># タブ名</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        layout.label(text=<span class="hljs-string">"オペレーターを実行"</span>)  <span class="hljs-comment"># テキスト表示</span>
+        layout.operator(<span class="hljs-string">"object.move_x"</span>)  <span class="hljs-comment"># オペレーターのボタンを追加</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MoveObjectOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""オブジェクトをX方向に移動"""</span>
+    bl_idname = <span class="hljs-string">"object.move_x"</span>
+    bl_label = <span class="hljs-string">"X軸に2m移動"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        obj = context.object
+        <span class="hljs-keyword">if</span> obj:
+            obj.location.x += <span class="hljs-number">2</span>
+            self.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"オブジェクトを移動しました"</span>)
+        <span class="hljs-keyword">else</span>:
+            self.report({<span class="hljs-string">'WARNING'</span>}, <span class="hljs-string">"オブジェクトを選択してください"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(CustomPanel)
+    bpy.utils.register_class(MoveObjectOperator)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(CustomPanel)
+    bpy.utils.unregister_class(MoveObjectOperator)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<h3 id="422-%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95"><strong>4.2.2 実行方法</strong></h3>
+<ol>
+<li>Blenderの<strong>テキストエディタ</strong>でスクリプトを実行</li>
+<li><code>N</code>キーを押してサイドバーを開く</li>
+<li><strong>「ツール」タブ</strong> に「カスタムツール」パネルが追加される</li>
+<li>「X軸に2m移動」ボタンを押すと、選択オブジェクトが移動する</li>
+</ol>
+<hr>
+<h2 id="43-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%81%AE%E8%BF%BD%E5%8A%A0"><strong>4.3 カスタムメニューの追加</strong></h2>
+<p>パネルだけでなく、<strong>メニューを拡張する</strong> こともできます。</p>
+<h3 id="431-%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%92%E8%BF%BD%E5%8A%A0"><strong>4.3.1 メニューを追加</strong></h3>
+<p>以下のコードを追加すると、オブジェクトモードの右クリックメニューに「X軸に2m移動」の項目を追加できます。</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomMenu</span><span class="hljs-params">(bpy.types.Menu)</span>:</span>
+    <span class="hljs-string">"""カスタムメニュー"""</span>
+    bl_label = <span class="hljs-string">"カスタム操作"</span>
+    bl_idname = <span class="hljs-string">"OBJECT_MT_custom_menu"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        layout.operator(<span class="hljs-string">"object.move_x"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">menu_func</span><span class="hljs-params">(self, context)</span>:</span>
+    self.layout.menu(<span class="hljs-string">"OBJECT_MT_custom_menu"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(CustomMenu)
+    bpy.utils.register_class(MoveObjectOperator)
+    bpy.types.VIEW3D_MT_object.append(menu_func)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(CustomMenu)
+    bpy.utils.unregister_class(MoveObjectOperator)
+    bpy.types.VIEW3D_MT_object.remove(menu_func)
+</div></code></pre>
+<h3 id="432-%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95"><strong>4.3.2 実行方法</strong></h3>
+<ol>
+<li>スクリプトを実行</li>
+<li>3Dビューで <strong>オブジェクトを右クリック</strong></li>
+<li>「カスタム操作」→「X軸に2m移動」の項目が追加される</li>
+</ol>
+<hr>
+<h2 id="44-%E3%83%AA%E3%82%B9%E3%83%88%E8%A1%A8%E7%A4%BAuilist%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>4.4 リスト表示（UIList）の活用</strong></h2>
+<p>オブジェクトのリストやカスタムデータを表示する場合、<code>bpy.types.UIList</code> を使うことができます。</p>
+<h3 id="441-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%AA%E3%82%B9%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90"><strong>4.4.1 カスタムオブジェクトリストを作成</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OBJECT_UL_custom_list</span><span class="hljs-params">(bpy.types.UIList)</span>:</span>
+    <span class="hljs-string">"""オブジェクトのリスト"""</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw_item</span><span class="hljs-params">(self, context, layout, data, item, icon, active_data, active_propname, index)</span>:</span>
+        layout.label(text=item.name, icon=<span class="hljs-string">'OBJECT_DATAMODE'</span>)
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomListPanel</span><span class="hljs-params">(bpy.types.Panel)</span>:</span>
+    <span class="hljs-string">"""リストを表示するパネル"""</span>
+    bl_label = <span class="hljs-string">"オブジェクトリスト"</span>
+    bl_idname = <span class="hljs-string">"VIEW3D_PT_custom_list"</span>
+    bl_space_type = <span class="hljs-string">'VIEW_3D'</span>
+    bl_region_type = <span class="hljs-string">'UI'</span>
+    bl_category = <span class="hljs-string">"ツール"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        layout.template_list(<span class="hljs-string">"OBJECT_UL_custom_list"</span>, <span class="hljs-string">""</span>, context.scene, <span class="hljs-string">"objects"</span>, context.scene, <span class="hljs-string">"active_object"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(OBJECT_UL_custom_list)
+    bpy.utils.register_class(CustomListPanel)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(OBJECT_UL_custom_list)
+    bpy.utils.unregister_class(CustomListPanel)
+</div></code></pre>
+<h3 id="442-%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95"><strong>4.4.2 実行方法</strong></h3>
+<ol>
+<li>スクリプトを実行</li>
+<li><code>N</code>キーでサイドバーを開く</li>
+<li><strong>「ツール」タブにオブジェクトリストが表示される</strong></li>
+<li>リストからオブジェクトを選択すると、アクティブオブジェクトが変わる</li>
+</ol>
+<hr>
+<h2 id="45-ui%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%A8%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AE%E5%90%91%E4%B8%8A"><strong>4.5 UIのデザインとユーザビリティの向上</strong></h2>
+<p>BlenderのUIをカスタマイズする際、以下のポイントを意識すると <strong>ユーザビリティが向上</strong> します。</p>
+<h3 id="451-%E3%83%91%E3%83%8D%E3%83%AB%E3%81%AE%E6%95%B4%E7%90%86"><strong>4.5.1 パネルの整理</strong></h3>
+<ul>
+<li><strong>関連する機能を1つのパネルにまとめる</strong></li>
+<li><strong>複数のカテゴリにまたがらないようにする</strong></li>
+<li><strong>セクションをボックス (<code>layout.box()</code>) で分ける</strong></li>
+</ul>
+<pre class="hljs"><code><div>box = layout.box()
+box.label(text=<span class="hljs-string">"基本操作"</span>)
+box.operator(<span class="hljs-string">"object.move_x"</span>)
+</div></code></pre>
+<h3 id="452-ui%E3%81%AE%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88"><strong>4.5.2 UIのレイアウト</strong></h3>
+<ul>
+<li><strong>縦に並べる</strong> → <code>layout.prop()</code></li>
+<li><strong>横に並べる</strong> → <code>row = layout.row(); row.prop(...)</code></li>
+<li><strong>カラムを作成</strong> → <code>col = layout.column(); col.prop(...)</code></li>
+</ul>
+<pre class="hljs"><code><div>row = layout.row()
+row.operator(<span class="hljs-string">"object.move_x"</span>)
+row.operator(<span class="hljs-string">"object.delete"</span>)
+</div></code></pre>
+<h3 id="453-%E3%83%84%E3%83%BC%E3%83%AB%E3%83%81%E3%83%83%E3%83%97%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>4.5.3 ツールチップの活用</strong></h3>
+<ul>
+<li><code>bl_description</code> を追加すると、ツールチップが表示される</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MoveObjectOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""選択オブジェクトをX方向に2m移動"""</span>
+    bl_idname = <span class="hljs-string">"object.move_x"</span>
+    bl_label = <span class="hljs-string">"X軸に2m移動"</span>
+    bl_description = <span class="hljs-string">"選択オブジェクトをX方向に2m移動します"</span>
+</div></code></pre>
+<hr>
+<h2 id="46-%E3%81%BE%E3%81%A8%E3%82%81"><strong>4.6 まとめ</strong></h2>
+<p>この章では、BlenderのUIをカスタマイズし、パネルやメニューを追加する方法を学びました。</p>
+<ul>
+<li><code>bpy.types.Panel</code> を使って <strong>サイドバーにパネルを追加</strong></li>
+<li><code>bpy.types.Menu</code> で <strong>右クリックメニューにカスタム項目を追加</strong></li>
+<li><code>bpy.types.UIList</code> を使って <strong>オブジェクトのリストを表示</strong></li>
+<li><strong>UIの整理とデザインのコツ</strong></li>
+</ul>
+<hr>
+<h2 id="47-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>4.7 次回予告</strong></h2>
+<p>次回は <strong>「Blenderのデータ構造とカスタムプロパティの管理」</strong> を解説します。<br>
+アドオンで独自の設定を保存し、データを管理する方法を学びましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC5%E7%AB%A0blender%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0%E3%81%A8%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E7%AE%A1%E7%90%86"><strong>第5章：Blenderのデータ構造とカスタムプロパティの管理</strong></h3>
+<p>前回は <strong>BlenderのUIをカスタマイズし、パネルやメニューを追加する方法</strong> を学びました。<br>
+今回は、Blenderの内部データ構造を理解し、<strong>カスタムプロパティ（独自のデータ）を管理する方法</strong> を解説します。</p>
+<p>この章では、以下の内容を学びます。</p>
+<ul>
+<li><strong>Blenderのデータ構造（シーン・オブジェクト・プロパティ）</strong></li>
+<li><strong>カスタムプロパティの追加</strong></li>
+<li><strong>カスタムプロパティをパネルで編集</strong></li>
+<li><strong>カスタムプロパティの保存と読み込み</strong></li>
+<li><strong>プロパティグループの活用</strong></li>
+</ul>
+<hr>
+<h2 id="51-blender%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0%E3%81%A8%E3%81%AF"><strong>5.1 Blenderのデータ構造とは？</strong></h2>
+<p>Blenderのデータは、<strong>データブロック（Data Blocks）</strong> という構造で管理されています。<br>
+データブロックは、Blenderの <code>.blend</code> ファイルに保存され、<strong>相互にリンク可能</strong> です。</p>
+<p>例えば、以下のようなデータ構造を持っています。</p>
+<pre class="hljs"><code><div>Scene（シーン）
+ ├── Collection（コレクション）
+ │   ├── Object（オブジェクト）
+ │   │   ├── Mesh（メッシュデータ）
+ │   │   ├── Material（マテリアル）
+ │   │   ├── Modifier（モディファイア）
+ │   │   ├── Custom Properties（カスタムプロパティ）
+ │   │   └── Constraints（コンストレイント）
+ │   └── Light（ライト）
+ ├── Camera（カメラ）
+ ├── World（ワールド設定）
+ ├── Render Settings（レンダー設定）
+ └── Custom Properties（シーンのカスタムプロパティ）
+</div></code></pre>
+<p><strong>データアクセスの例</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-comment"># シーンにある全オブジェクトの名前を表示</span>
+<span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects:
+    print(obj.name)
+
+<span class="hljs-comment"># アクティブオブジェクトのメッシュデータを取得</span>
+mesh = bpy.context.object.data <span class="hljs-keyword">if</span> bpy.context.object.type == <span class="hljs-string">'MESH'</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">None</span>
+
+<span class="hljs-comment"># シーンのレンダー解像度を変更</span>
+bpy.context.scene.render.resolution_x = <span class="hljs-number">1920</span>
+bpy.context.scene.render.resolution_y = <span class="hljs-number">1080</span>
+</div></code></pre>
+<p>Blenderのデータ構造を理解すると、<strong>シーンやオブジェクトの情報をカスタマイズ</strong> しやすくなります。</p>
+<hr>
+<h2 id="52-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%A8%E3%81%AF"><strong>5.2 カスタムプロパティとは？</strong></h2>
+<p><strong>カスタムプロパティ（Custom Properties）</strong> は、オブジェクトやシーンに独自のデータを追加する機能です。<br>
+例えば、<strong>「オブジェクトの分類」「数値設定」「カスタムタグ」</strong> などを保存できます。</p>
+<p>カスタムプロパティを使うことで、<strong>アドオンで独自のデータを管理</strong> したり、Blenderの既存機能を拡張することが可能になります。</p>
+<hr>
+<h2 id="53-%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AB%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%82%92%E8%BF%BD%E5%8A%A0"><strong>5.3 オブジェクトにカスタムプロパティを追加</strong></h2>
+<p>オブジェクトに <strong>「カスタムID」</strong> というプロパティを追加してみましょう。</p>
+<h3 id="531-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E8%BF%BD%E5%8A%A0"><strong>5.3.1 カスタムプロパティの追加</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+bpy.context.object[<span class="hljs-string">"custom_id"</span>] = <span class="hljs-number">123</span>  <span class="hljs-comment"># カスタムプロパティを追加</span>
+print(bpy.context.object[<span class="hljs-string">"custom_id"</span>])  <span class="hljs-comment"># 取得</span>
+</div></code></pre>
+<p><strong>オブジェクトにプロパティが追加される場所</strong></p>
+<ol>
+<li><code>N</code> キーでサイドバーを開く</li>
+<li><strong>「オブジェクト」タブ</strong> を選択</li>
+<li><strong>「カスタムプロパティ」セクション</strong> に <code>custom_id</code> が表示される</li>
+</ol>
+<hr>
+<h2 id="54-%E3%83%91%E3%83%8D%E3%83%AB%E3%81%A7%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%82%92%E7%B7%A8%E9%9B%86"><strong>5.4 パネルでカスタムプロパティを編集</strong></h2>
+<p>カスタムプロパティをパネルで編集できるようにしてみましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomPropertyPanel</span><span class="hljs-params">(bpy.types.Panel)</span>:</span>
+    <span class="hljs-string">"""カスタムプロパティ編集パネル"""</span>
+    bl_label = <span class="hljs-string">"カスタムプロパティ"</span>
+    bl_idname = <span class="hljs-string">"VIEW3D_PT_custom_props"</span>
+    bl_space_type = <span class="hljs-string">'VIEW_3D'</span>
+    bl_region_type = <span class="hljs-string">'UI'</span>
+    bl_category = <span class="hljs-string">"ツール"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        obj = context.object
+
+        <span class="hljs-keyword">if</span> obj:
+            layout.prop(obj, <span class="hljs-string">'["custom_id"]'</span>, text=<span class="hljs-string">"カスタムID"</span>)
+        <span class="hljs-keyword">else</span>:
+            layout.label(text=<span class="hljs-string">"オブジェクトを選択してください"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(CustomPropertyPanel)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(CustomPropertyPanel)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<p><strong>実行方法</strong></p>
+<ol>
+<li>スクリプトを実行</li>
+<li><code>N</code> キーでサイドバーを開く</li>
+<li><strong>「ツール」タブ</strong> に「カスタムプロパティ」が表示される</li>
+<li><strong>カスタムIDを変更</strong> すると、オブジェクトにデータが保存される</li>
+</ol>
+<hr>
+<h2 id="55-%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E6%B4%BB%E7%94%A8"><strong>5.5 プロパティグループを活用</strong></h2>
+<p>Blenderの <code>bpy.props</code> を使うと、より便利にプロパティを管理できます。</p>
+<h3 id="551-%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AE%E4%BD%9C%E6%88%90"><strong>5.5.1 プロパティグループの作成</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomProperties</span><span class="hljs-params">(bpy.types.PropertyGroup)</span>:</span>
+    custom_id: bpy.props.IntProperty(name=<span class="hljs-string">"カスタムID"</span>, default=<span class="hljs-number">100</span>)
+    custom_text: bpy.props.StringProperty(name=<span class="hljs-string">"カスタムテキスト"</span>, default=<span class="hljs-string">"デフォルト"</span>)
+    custom_toggle: bpy.props.BoolProperty(name=<span class="hljs-string">"オン/オフ"</span>, default=<span class="hljs-literal">False</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(CustomProperties)
+    bpy.types.Object.my_props = bpy.props.PointerProperty(type=CustomProperties)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(CustomProperties)
+    <span class="hljs-keyword">del</span> bpy.types.Object.my_props
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<p>このスクリプトを実行すると、オブジェクトに <code>my_props</code> というカスタムプロパティグループが追加されます。</p>
+<hr>
+<h3 id="552-%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E3%83%91%E3%83%8D%E3%83%AB%E3%81%A7%E7%B7%A8%E9%9B%86"><strong>5.5.2 プロパティグループをパネルで編集</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomPropertyPanel</span><span class="hljs-params">(bpy.types.Panel)</span>:</span>
+    <span class="hljs-string">"""カスタムプロパティパネル"""</span>
+    bl_label = <span class="hljs-string">"カスタムプロパティ"</span>
+    bl_idname = <span class="hljs-string">"VIEW3D_PT_custom_props"</span>
+    bl_space_type = <span class="hljs-string">'VIEW_3D'</span>
+    bl_region_type = <span class="hljs-string">'UI'</span>
+    bl_category = <span class="hljs-string">"ツール"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        obj = context.object
+
+        <span class="hljs-keyword">if</span> obj <span class="hljs-keyword">and</span> hasattr(obj, <span class="hljs-string">"my_props"</span>):
+            layout.prop(obj.my_props, <span class="hljs-string">"custom_id"</span>)
+            layout.prop(obj.my_props, <span class="hljs-string">"custom_text"</span>)
+            layout.prop(obj.my_props, <span class="hljs-string">"custom_toggle"</span>)
+        <span class="hljs-keyword">else</span>:
+            layout.label(text=<span class="hljs-string">"オブジェクトを選択してください"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(CustomPropertyPanel)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(CustomPropertyPanel)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<p><strong>実行方法</strong></p>
+<ol>
+<li>スクリプトを実行</li>
+<li><code>N</code> キーでサイドバーを開く</li>
+<li>「ツール」タブ → 「カスタムプロパティ」に新しい項目が追加される</li>
+</ol>
+<hr>
+<h2 id="56-%E3%81%BE%E3%81%A8%E3%82%81"><strong>5.6 まとめ</strong></h2>
+<p>この章では、Blenderのデータ構造とカスタムプロパティの管理方法を学びました。</p>
+<ul>
+<li>Blenderのデータは <strong>データブロック</strong> で管理されている</li>
+<li>カスタムプロパティを追加すると、<strong>オブジェクトに独自のデータを保存できる</strong></li>
+<li><code>bpy.props</code> を使うと、より便利にプロパティを管理できる</li>
+<li>UIパネルを作成して、カスタムプロパティを <strong>GUIで編集できるようにする</strong></li>
+</ul>
+<hr>
+<h2 id="57-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>5.7 次回予告</strong></h2>
+<p>次回は <strong>「アドオンの設定を保存・読み込みする方法」</strong> を解説します！<br>
+ユーザーの設定を永続化し、アドオンを便利にする方法を学びましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC6%E7%AB%A0%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%82%92%E4%BF%9D%E5%AD%98%E3%83%BB%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95"><strong>第6章：アドオンの設定を保存・読み込みする方法</strong></h3>
+<p>前回は <strong>Blenderのデータ構造とカスタムプロパティの管理</strong> について学びました。<br>
+今回は、<strong>アドオンの設定を保存・読み込みする方法</strong> を解説します。</p>
+<p>Blenderでは、アドオンの設定を <strong>Blenderのプリファレンス（ユーザー設定）</strong> に保存できます。<br>
+これにより、<strong>Blenderを再起動しても設定が維持される</strong> ようになります。</p>
+<p>この章では、以下の内容を学びます。</p>
+<ul>
+<li><strong>アドオンの設定を保存する方法</strong></li>
+<li><strong>アドオンの設定をUIパネルで編集</strong></li>
+<li><strong>アドオンの設定を読み込む</strong></li>
+<li><strong>設定をデフォルト値にリセット</strong></li>
+<li><strong>設定をファイルにエクスポート・インポート</strong></li>
+</ul>
+<hr>
+<h2 id="61-%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95"><strong>6.1 アドオンの設定を保存する方法</strong></h2>
+<p>アドオンの設定を保存するには、<strong><code>bpy.types.AddonPreferences</code> を使う</strong> のが最も簡単な方法です。</p>
+<p>Blenderの <strong>「編集」 &gt; 「プリファレンス」 &gt; 「アドオン」</strong> に設定を追加できます。</p>
+<hr>
+<h3 id="611-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E8%A8%AD%E5%AE%9A"><strong>6.1.1 基本的なアドオンの設定</strong></h3>
+<p>以下のコードを実行すると、アドオンの設定をプリファレンスに保存できます。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAddonPreferences</span><span class="hljs-params">(bpy.types.AddonPreferences)</span>:</span>
+    <span class="hljs-string">"""アドオンの設定を管理"""</span>
+    bl_idname = __name__  <span class="hljs-comment"># アドオンID（通常は __name__ を使う）</span>
+
+    my_string: bpy.props.StringProperty(name=<span class="hljs-string">"文字列"</span>, default=<span class="hljs-string">"デフォルト値"</span>)
+    my_int: bpy.props.IntProperty(name=<span class="hljs-string">"数値"</span>, default=<span class="hljs-number">10</span>)
+    my_bool: bpy.props.BoolProperty(name=<span class="hljs-string">"スイッチ"</span>, default=<span class="hljs-literal">True</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        layout.label(text=<span class="hljs-string">"アドオンの設定"</span>)
+        layout.prop(self, <span class="hljs-string">"my_string"</span>)
+        layout.prop(self, <span class="hljs-string">"my_int"</span>)
+        layout.prop(self, <span class="hljs-string">"my_bool"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(MyAddonPreferences)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(MyAddonPreferences)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<hr>
+<h3 id="612-%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95"><strong>6.1.2 実行方法</strong></h3>
+<ol>
+<li>スクリプトを実行</li>
+<li><strong>「編集」 &gt; 「プリファレンス」 &gt; 「アドオン」</strong> を開く</li>
+<li>検索バーに <code>MyAddonPreferences</code> を入力</li>
+<li><strong>「アドオンの設定」</strong> という項目が追加されている</li>
+</ol>
+<p>この方法を使うと、アドオンの設定を<strong>Blenderのプリファレンスに保存</strong> できます。</p>
+<hr>
+<h2 id="62-%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%82%92ui%E3%83%91%E3%83%8D%E3%83%AB%E3%81%A7%E7%B7%A8%E9%9B%86"><strong>6.2 アドオンの設定をUIパネルで編集</strong></h2>
+<p>プリファレンスに保存した設定を、<strong>3Dビューのパネルから編集できるように</strong> してみましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAddonPreferences</span><span class="hljs-params">(bpy.types.AddonPreferences)</span>:</span>
+    <span class="hljs-string">"""アドオンの設定を管理"""</span>
+    bl_idname = __name__
+
+    my_string: bpy.props.StringProperty(name=<span class="hljs-string">"文字列"</span>, default=<span class="hljs-string">"デフォルト値"</span>)
+    my_int: bpy.props.IntProperty(name=<span class="hljs-string">"数値"</span>, default=<span class="hljs-number">10</span>)
+    my_bool: bpy.props.BoolProperty(name=<span class="hljs-string">"スイッチ"</span>, default=<span class="hljs-literal">True</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        layout.label(text=<span class="hljs-string">"アドオンの設定"</span>)
+        layout.prop(self, <span class="hljs-string">"my_string"</span>)
+        layout.prop(self, <span class="hljs-string">"my_int"</span>)
+        layout.prop(self, <span class="hljs-string">"my_bool"</span>)
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAddonPanel</span><span class="hljs-params">(bpy.types.Panel)</span>:</span>
+    <span class="hljs-string">"""3Dビューに設定パネルを追加"""</span>
+    bl_label = <span class="hljs-string">"アドオン設定"</span>
+    bl_idname = <span class="hljs-string">"VIEW3D_PT_myaddon_panel"</span>
+    bl_space_type = <span class="hljs-string">'VIEW_3D'</span>
+    bl_region_type = <span class="hljs-string">'UI'</span>
+    bl_category = <span class="hljs-string">"ツール"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, context)</span>:</span>
+        layout = self.layout
+        prefs = bpy.context.preferences.addons[__name__].preferences
+
+        layout.label(text=<span class="hljs-string">"アドオン設定"</span>)
+        layout.prop(prefs, <span class="hljs-string">"my_string"</span>)
+        layout.prop(prefs, <span class="hljs-string">"my_int"</span>)
+        layout.prop(prefs, <span class="hljs-string">"my_bool"</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(MyAddonPreferences)
+    bpy.utils.register_class(MyAddonPanel)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(MyAddonPreferences)
+    bpy.utils.unregister_class(MyAddonPanel)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<hr>
+<h3 id="621-%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95"><strong>6.2.1 実行方法</strong></h3>
+<ol>
+<li>スクリプトを実行</li>
+<li><code>N</code> キーでサイドバーを開く</li>
+<li>「ツール」タブの <strong>「アドオン設定」</strong> パネルが表示される</li>
+<li>設定を変更すると、プリファレンスに反映される</li>
+</ol>
+<hr>
+<h2 id="63-%E8%A8%AD%E5%AE%9A%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><strong>6.3 設定を読み込む</strong></h2>
+<p>アドオンが起動したときに、<strong>プリファレンスの設定を読み込む</strong> 方法を解説します。</p>
+<h3 id="631-%E8%A8%AD%E5%AE%9A%E3%81%AE%E5%8F%96%E5%BE%97"><strong>6.3.1 設定の取得</strong></h3>
+<p>プリファレンスに保存された値をスクリプト内で取得できます。</p>
+<pre class="hljs"><code><div>prefs = bpy.context.preferences.addons[__name__].preferences
+print(prefs.my_string)
+print(prefs.my_int)
+print(prefs.my_bool)
+</div></code></pre>
+<p>これを活用すれば、アドオンの挙動をユーザー設定に応じて変更できます。</p>
+<hr>
+<h2 id="64-%E8%A8%AD%E5%AE%9A%E3%82%92%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E5%80%A4%E3%81%AB%E3%83%AA%E3%82%BB%E3%83%83%E3%83%88"><strong>6.4 設定をデフォルト値にリセット</strong></h2>
+<p>設定をデフォルト値に戻すボタンを追加してみましょう。</p>
+<h3 id="641-%E8%A8%AD%E5%AE%9A%E3%82%92%E3%83%AA%E3%82%BB%E3%83%83%E3%83%88%E3%81%99%E3%82%8B%E3%82%AA%E3%83%9A%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC"><strong>6.4.1 設定をリセットするオペレーター</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResetPreferencesOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""設定をリセットする"""</span>
+    bl_idname = <span class="hljs-string">"addon.reset_preferences"</span>
+    bl_label = <span class="hljs-string">"設定をリセット"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        prefs = bpy.context.preferences.addons[__name__].preferences
+        prefs.my_string = <span class="hljs-string">"デフォルト値"</span>
+        prefs.my_int = <span class="hljs-number">10</span>
+        prefs.my_bool = <span class="hljs-literal">True</span>
+        self.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"設定をリセットしました"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(ResetPreferencesOperator)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(ResetPreferencesOperator)
+</div></code></pre>
+<h3 id="642-%E3%83%AA%E3%82%BB%E3%83%83%E3%83%88%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E3%83%91%E3%83%8D%E3%83%AB%E3%81%AB%E8%BF%BD%E5%8A%A0"><strong>6.4.2 リセットボタンをパネルに追加</strong></h3>
+<pre class="hljs"><code><div>layout.operator(<span class="hljs-string">"addon.reset_preferences"</span>, text=<span class="hljs-string">"リセット"</span>)
+</div></code></pre>
+<hr>
+<h2 id="65-%E8%A8%AD%E5%AE%9A%E3%82%92%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%83%BB%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88"><strong>6.5 設定をファイルにエクスポート・インポート</strong></h2>
+<p>プリファレンスの設定を <strong>JSONファイル</strong> に保存し、後で読み込めるようにしてみましょう。</p>
+<h3 id="651-%E8%A8%AD%E5%AE%9A%E3%82%92json%E3%81%AB%E4%BF%9D%E5%AD%98"><strong>6.5.1 設定をJSONに保存</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SaveSettingsOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""設定をJSONファイルに保存"""</span>
+    bl_idname = <span class="hljs-string">"addon.save_settings"</span>
+    bl_label = <span class="hljs-string">"設定を保存"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        prefs = bpy.context.preferences.addons[__name__].preferences
+        settings = {
+            <span class="hljs-string">"my_string"</span>: prefs.my_string,
+            <span class="hljs-string">"my_int"</span>: prefs.my_int,
+            <span class="hljs-string">"my_bool"</span>: prefs.my_bool
+        }
+        <span class="hljs-keyword">with</span> open(<span class="hljs-string">"/tmp/addon_settings.json"</span>, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> f:
+            json.dump(settings, f)
+        self.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"設定を保存しました"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+</div></code></pre>
+<h3 id="652-%E8%A8%AD%E5%AE%9A%E3%82%92json%E3%81%8B%E3%82%89%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF"><strong>6.5.2 設定をJSONから読み込み</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoadSettingsOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""設定をJSONファイルから読み込む"""</span>
+    bl_idname = <span class="hljs-string">"addon.load_settings"</span>
+    bl_label = <span class="hljs-string">"設定を読み込む"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        prefs = bpy.context.preferences.addons[__name__].preferences
+        <span class="hljs-keyword">try</span>:
+            <span class="hljs-keyword">with</span> open(<span class="hljs-string">"/tmp/addon_settings.json"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> f:
+                settings = json.load(f)
+            prefs.my_string = settings[<span class="hljs-string">"my_string"</span>]
+            prefs.my_int = settings[<span class="hljs-string">"my_int"</span>]
+            prefs.my_bool = settings[<span class="hljs-string">"my_bool"</span>]
+            self.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"設定を読み込みました"</span>)
+        <span class="hljs-keyword">except</span> FileNotFoundError:
+            self.report({<span class="hljs-string">'ERROR'</span>}, <span class="hljs-string">"設定ファイルが見つかりません"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+</div></code></pre>
+<hr>
+<h2 id="66-%E3%81%BE%E3%81%A8%E3%82%81"><strong>6.6 まとめ</strong></h2>
+<p>この章では、アドオンの設定を保存・読み込みする方法を学びました。</p>
+<ul>
+<li><strong>Blenderのプリファレンスに設定を保存</strong></li>
+<li><strong>UIパネルから設定を編集</strong></li>
+<li><strong>設定を読み込んでアドオンの動作に反映</strong></li>
+<li><strong>デフォルト値にリセットする機能</strong></li>
+<li><strong>設定をJSONファイルに保存・読み込み</strong></li>
+</ul>
+<hr>
+<h2 id="67-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>6.7 次回予告</strong></h2>
+<p>次回は <strong>「アドオンを配布・公開する方法」</strong> を解説します！<br>
+GitHubやBlender Marketにアドオンをアップロードし、世界中のユーザーに届ける方法を学びましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC7%E7%AB%A0%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%82%92%E9%85%8D%E5%B8%83%E3%83%BB%E5%85%AC%E9%96%8B%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95"><strong>第7章：アドオンを配布・公開する方法</strong></h3>
+<p>前回は <strong>アドオンの設定を保存・読み込みする方法</strong> を学びました。<br>
+今回は、作成したアドオンを <strong>配布・公開する方法</strong> を解説します。</p>
+<p>Blenderアドオンを公開することで、他のユーザーにも使ってもらえたり、<strong>収益化</strong> することも可能になります。<br>
+今回は、以下の内容を詳しく解説します。</p>
+<ul>
+<li><strong>アドオンの配布準備</strong></li>
+<li><strong>ZIPファイルにパッケージ化</strong></li>
+<li><strong>GitHubで公開</strong></li>
+<li><strong>Blender Marketで販売</strong></li>
+<li><strong>Gumroad / BOOTH で配布</strong></li>
+<li><strong>公式アドオンリポジトリへの登録</strong></li>
+<li><strong>アップデートとメンテナンスの重要性</strong></li>
+</ul>
+<hr>
+<h2 id="71-%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E9%85%8D%E5%B8%83%E6%BA%96%E5%82%99"><strong>7.1 アドオンの配布準備</strong></h2>
+<p>まず、アドオンを他のユーザーに提供する前に、<strong>必要なファイルを整理</strong> しておきましょう。</p>
+<h3 id="711-%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E6%A7%8B%E6%88%90%E6%8E%A8%E5%A5%A8"><strong>7.1.1 アドオンのフォルダ構成（推奨）</strong></h3>
+<pre class="hljs"><code><div>my_addon/                ← アドオンフォルダ（英数字が望ましい）
+ ├── __init__.py         ← メインスクリプト（必須）
+ ├── operators.py        ← 操作を定義（オプション）
+ ├── ui.py               ← UIを定義（オプション）
+ ├── utils.py            ← ヘルパー関数（オプション）
+ ├── README.md           ← 説明書（推奨）
+ ├── LICENSE             ← ライセンス情報（推奨）
+ ├── example.blend       ← サンプルファイル（オプション）
+ └── docs/               ← ドキュメント（オプション）
+</div></code></pre>
+<p><strong>重要なファイル</strong></p>
+<ul>
+<li><code>__init__.py</code> → <strong>アドオンのエントリーポイント（必須）</strong></li>
+<li><code>README.md</code> → <strong>使い方を記載</strong></li>
+<li><code>LICENSE</code> → <strong>ライセンス情報（MIT, GPL など）</strong></li>
+</ul>
+<hr>
+<h2 id="72-zip%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96"><strong>7.2 ZIPファイルにパッケージ化</strong></h2>
+<p>Blenderのアドオンは <strong>ZIP形式</strong> で配布するのが一般的です。</p>
+<h3 id="721-zip%E5%9C%A7%E7%B8%AE%E6%89%8B%E9%A0%86"><strong>7.2.1 ZIP圧縮手順</strong></h3>
+<ol>
+<li><strong>アドオンフォルダ（<code>my_addon/</code>）を選択</strong></li>
+<li><strong>右クリック &gt; 圧縮 &gt; ZIP形式</strong></li>
+<li><code>my_addon.zip</code> を作成</li>
+</ol>
+<p>このZIPファイルを <strong>「アドオンをインストール」</strong> から簡単に追加できます。</p>
+<h3 id="722-blender%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%83%86%E3%82%B9%E3%83%88"><strong>7.2.2 Blenderでインストールテスト</strong></h3>
+<ol>
+<li><strong>Blenderを開く</strong></li>
+<li><strong>「編集」 &gt; 「プリファレンス」 &gt; 「アドオン」</strong></li>
+<li><strong>「インストール」ボタンをクリック</strong></li>
+<li><code>my_addon.zip</code> を選択</li>
+<li>インストール後、アドオンを有効化して動作確認</li>
+</ol>
+<hr>
+<h2 id="73-github%E3%81%A7%E5%85%AC%E9%96%8B"><strong>7.3 GitHubで公開</strong></h2>
+<p>オープンソースとして無料で公開する場合、<strong>GitHub</strong> を利用すると便利です。</p>
+<h3 id="731-github%E3%81%AB%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89"><strong>7.3.1 GitHubにアップロード</strong></h3>
+<ol>
+<li><a href="https://github.com/">GitHub</a> にログインし、新しいリポジトリを作成</li>
+<li><strong>リポジトリ名</strong> を <code>my_addon</code> にする</li>
+<li><code>README.md</code> や <code>LICENSE</code> を追加</li>
+<li>ローカルのアドオンフォルダをGit管理下に追加</li>
+</ol>
+<pre class="hljs"><code><div>git init
+git add .
+git commit -m <span class="hljs-string">"First release"</span>
+git branch -M main
+git remote add origin https://github.com/ユーザー名/my_addon.git
+git push -u origin main
+</div></code></pre>
+<h3 id="732-github-releases-%E3%81%A7zip%E3%82%92%E5%85%AC%E9%96%8B"><strong>7.3.2 GitHub Releases でZIPを公開</strong></h3>
+<ol>
+<li><strong>リポジトリの「Releases」タブに移動</strong></li>
+<li><strong>「New Release」ボタンをクリック</strong></li>
+<li><strong>バージョンを指定（例: v1.0.0）</strong></li>
+<li><code>my_addon.zip</code> をアップロード</li>
+<li><strong>「Publish Release」ボタンをクリック</strong></li>
+</ol>
+<p>この方法で <strong>ユーザーが簡単にZIPをダウンロード</strong> できるようになります。</p>
+<hr>
+<h2 id="74-blender-market%E3%81%A7%E8%B2%A9%E5%A3%B2"><strong>7.4 Blender Marketで販売</strong></h2>
+<p><strong><a href="https://blendermarket.com/">Blender Market</a></strong> は、有料アドオンを販売できるプラットフォームです。</p>
+<h3 id="741-blender-market%E3%81%A7%E3%81%AE%E8%B2%A9%E5%A3%B2%E6%89%8B%E9%A0%86"><strong>7.4.1 Blender Marketでの販売手順</strong></h3>
+<ol>
+<li><strong>アカウントを作成</strong></li>
+<li><strong>「Sell Your Work」から販売者登録</strong></li>
+<li><strong>新しい商品を追加</strong></li>
+<li><strong>ZIPファイルをアップロード</strong></li>
+<li><strong>価格を設定（$5〜$50が一般的）</strong></li>
+<li><strong>説明文とスクリーンショットを追加</strong></li>
+<li><strong>販売開始！</strong></li>
+</ol>
+<p><strong>Blender Marketの特徴</strong></p>
+<ul>
+<li><strong>手数料30%</strong></li>
+<li><strong>多くのBlenderユーザーが利用</strong></li>
+<li><strong>セールやプロモーションが可能</strong></li>
+<li><strong>Blender開発の支援にもつながる</strong></li>
+</ul>
+<hr>
+<h2 id="75-gumroad--booth-%E3%81%A7%E9%85%8D%E5%B8%83"><strong>7.5 Gumroad / BOOTH で配布</strong></h2>
+<p>Blender Market以外でも、<strong>Gumroad</strong> や <strong>BOOTH</strong> を利用して販売できます。</p>
+<h3 id="751-gumroad%E3%81%A7%E3%81%AE%E8%B2%A9%E5%A3%B2"><strong>7.5.1 Gumroadでの販売</strong></h3>
+<p><a href="https://gumroad.com/">Gumroad</a> は、デジタル商品を販売できるプラットフォームです。</p>
+<ol>
+<li><strong>Gumroadに登録</strong></li>
+<li><strong>「New Product」を作成</strong></li>
+<li><strong>ZIPファイルをアップロード</strong></li>
+<li><strong>価格を設定</strong></li>
+<li><strong>販売ページを公開</strong></li>
+</ol>
+<p><strong>メリット</strong></p>
+<ul>
+<li><strong>手数料が低い（8-10%）</strong></li>
+<li><strong>最低価格0円にして投げ銭方式も可能</strong></li>
+<li><strong>購入者リストを管理できる</strong></li>
+</ul>
+<hr>
+<h3 id="752-booth%E3%81%A7%E3%81%AE%E8%B2%A9%E5%A3%B2"><strong>7.5.2 BOOTHでの販売</strong></h3>
+<p><a href="https://booth.pm/">BOOTH</a> は、日本向けの販売プラットフォームです。</p>
+<ol>
+<li><strong>Pixivアカウントでログイン</strong></li>
+<li><strong>ショップを作成</strong></li>
+<li><strong>ZIPファイルをアップロード</strong></li>
+<li><strong>価格を設定</strong></li>
+<li><strong>販売開始！</strong></li>
+</ol>
+<p><strong>メリット</strong></p>
+<ul>
+<li><strong>日本円で販売できる</strong></li>
+<li><strong>コンビニ決済や銀行振込が可能</strong></li>
+<li><strong>クリエイター向けのコミュニティ</strong></li>
+</ul>
+<hr>
+<h2 id="76-blender%E5%85%AC%E5%BC%8F%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2"><strong>7.6 Blender公式リポジトリへの登録</strong></h2>
+<p>Blenderの公式アドオンとして登録するには、<strong><a href="https://projects.blender.org/blender/blender-addons">Blender Add-ons公式リポジトリ</a></strong> に申請する必要があります。</p>
+<h3 id="761-%E5%85%AC%E5%BC%8F%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86"><strong>7.6.1 公式アドオンの登録手順</strong></h3>
+<ol>
+<li><strong>GitHubでコードを公開</strong></li>
+<li><strong>Blenderの開発者向けガイドラインを満たす</strong></li>
+<li><strong>Blenderの開発者サイトに登録</strong></li>
+<li><strong>「New Task」を作成し、提案を提出</strong></li>
+<li><strong>コードレビューを受ける</strong></li>
+<li><strong>承認後、Blender公式に追加される</strong></li>
+</ol>
+<p><strong>公式アドオンの基準</strong></p>
+<ul>
+<li><strong>BlenderのUIガイドラインに準拠</strong></li>
+<li><strong>適切なライセンス（GPL）を適用</strong></li>
+<li><strong>品質チェックをクリア</strong></li>
+<li><strong>他のアドオンと競合しない</strong></li>
+</ul>
+<hr>
+<h2 id="77-%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%A8%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%81%AE%E9%87%8D%E8%A6%81%E6%80%A7"><strong>7.7 アップデートとメンテナンスの重要性</strong></h2>
+<p>アドオンを公開したら、<strong>定期的にアップデート</strong> することが重要です。</p>
+<h3 id="771-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86"><strong>7.7.1 バージョン管理</strong></h3>
+<ul>
+<li><code>1.0.0</code> → 最初のリリース</li>
+<li><code>1.1.0</code> → 機能追加</li>
+<li><code>1.2.0</code> → バグ修正</li>
+</ul>
+<p>バージョンを明記し、<strong>GitHubのリリースノートに変更点を記載</strong> しましょう。</p>
+<h3 id="772-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF%E3%82%92%E6%B4%BB%E7%94%A8"><strong>7.7.2 ユーザーフィードバックを活用</strong></h3>
+<ul>
+<li>GitHub Issues でバグ報告を受ける</li>
+<li>Blender Marketのレビューを参考に改善</li>
+<li>TwitterやDiscordでユーザーの意見を聞く</li>
+</ul>
+<hr>
+<h2 id="78-%E3%81%BE%E3%81%A8%E3%82%81"><strong>7.8 まとめ</strong></h2>
+<p>この章では、アドオンの配布・公開方法を学びました。</p>
+<ul>
+<li><strong>ZIPファイルにパッケージ化</strong></li>
+<li><strong>GitHubで無料公開</strong></li>
+<li><strong>Blender Marketで販売</strong></li>
+<li><strong>Gumroad / BOOTH で配布</strong></li>
+<li><strong>公式アドオンリポジトリに登録</strong></li>
+<li><strong>アップデートとメンテナンスの重要性</strong></li>
+</ul>
+<hr>
+<h2 id="79-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>7.9 次回予告</strong></h2>
+<p>次回は <strong>「アドオンの収益化戦略」</strong> を解説します！<br>
+有料アドオンの価格設定やマーケティング手法を詳しく見ていきましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC8%E7%AB%A0%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E5%8F%8E%E7%9B%8A%E5%8C%96%E6%88%A6%E7%95%A5"><strong>第8章：アドオンの収益化戦略</strong></h3>
+<p>前回は <strong>アドオンの配布・公開方法</strong> について学びました。<br>
+今回は、アドオンを <strong>収益化する戦略</strong> について詳しく解説します。</p>
+<p>Blenderアドオンは、<strong>無料公開だけでなく、有料販売によって収益を得ることも可能</strong> です。<br>
+実際に、Blender MarketやGumroadで月に数千ドル以上の売上を出しているアドオン開発者も存在します。</p>
+<p>この章では、以下の内容を学びます。</p>
+<ul>
+<li><strong>有料アドオン vs 無料アドオン</strong></li>
+<li><strong>価格設定の考え方</strong></li>
+<li><strong>販売プラットフォームの比較</strong></li>
+<li><strong>効果的なマーケティング戦略</strong></li>
+<li><strong>ユーザーサポートとコミュニティの構築</strong></li>
+<li><strong>アップデートと長期的な収益化の重要性</strong></li>
+</ul>
+<hr>
+<h2 id="81-%E6%9C%89%E6%96%99%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3-vs-%E7%84%A1%E6%96%99%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3"><strong>8.1 有料アドオン vs 無料アドオン</strong></h2>
+<p>まず、アドオンを <strong>有料で販売するか、無料で公開するか</strong> を考えましょう。</p>
+<table>
+<thead>
+<tr>
+<th><strong>項目</strong></th>
+<th><strong>無料アドオン</strong></th>
+<th><strong>有料アドオン</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ユーザー数</strong></td>
+<td>多い</td>
+<td>限定的（価格による）</td>
+</tr>
+<tr>
+<td><strong>収益</strong></td>
+<td>なし（寄付やスポンサー）</td>
+<td>直接収益化</td>
+</tr>
+<tr>
+<td><strong>サポートの負担</strong></td>
+<td>軽い（放置でもOK）</td>
+<td>重い（サポート義務が発生）</td>
+</tr>
+<tr>
+<td><strong>継続的な開発</strong></td>
+<td>モチベーション維持が難しい</td>
+<td>収益があれば開発継続しやすい</td>
+</tr>
+<tr>
+<td><strong>ブランド力</strong></td>
+<td>コミュニティで広まりやすい</td>
+<td>プロダクトとして評価される</td>
+</tr>
+</tbody>
+</table>
+<p>どちらを選ぶかは、<strong>アドオンの規模やターゲット層</strong> によります。</p>
+<h3 id="%E7%84%A1%E6%96%99%E5%85%AC%E9%96%8B%E3%81%8C%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88"><strong>無料公開が向いている場合</strong></h3>
+<ul>
+<li><strong>シンプルな機能</strong> のアドオン（小規模ツール）</li>
+<li>コミュニティに貢献したい場合</li>
+<li><strong>オープンソース開発</strong> をしたい場合</li>
+<li><strong>寄付（Patreon, Ko-fi）</strong> やスポンサーを得たい場合</li>
+</ul>
+<h3 id="%E6%9C%89%E6%96%99%E8%B2%A9%E5%A3%B2%E3%81%8C%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88"><strong>有料販売が向いている場合</strong></h3>
+<ul>
+<li><strong>高度な機能</strong> を持つアドオン</li>
+<li>開発やサポートに時間をかける予定がある</li>
+<li>継続的なアップデートを提供したい</li>
+<li><strong>収益化を目的にする</strong></li>
+</ul>
+<hr>
+<h2 id="82-%E4%BE%A1%E6%A0%BC%E8%A8%AD%E5%AE%9A%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9"><strong>8.2 価格設定の考え方</strong></h2>
+<p>アドオンの価格設定は <strong>ユーザーにとっての価値</strong> に基づくべきです。</p>
+<h3 id="821-%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E4%BE%A1%E6%A0%BC%E5%B8%AF"><strong>8.2.1 一般的な価格帯</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>アドオンの規模</strong></th>
+<th><strong>価格の目安</strong></th>
+<th><strong>例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>小規模ツール</strong></td>
+<td>$1 ～ $10</td>
+<td>シンプルなワークフロー改善アドオン</td>
+</tr>
+<tr>
+<td><strong>中規模アドオン</strong></td>
+<td>$10 ～ $30</td>
+<td>モデリング補助、アニメーションツール</td>
+</tr>
+<tr>
+<td><strong>高度なアドオン</strong></td>
+<td>$30 ～ $100</td>
+<td>プロ向けの高度なリグシステムやレンダリングツール</td>
+</tr>
+<tr>
+<td><strong>プレミアム</strong></td>
+<td>$100以上</td>
+<td>企業やスタジオ向けのソリューション</td>
+</tr>
+</tbody>
+</table>
+<p>価格を決める際は、<strong>市場の競合アドオンと比較</strong> するのが重要です。<br>
+例えば、<strong>同じ機能の無料アドオンがあるなら価格を低めに設定する必要がある</strong> でしょう。</p>
+<hr>
+<h2 id="83-%E8%B2%A9%E5%A3%B2%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E6%AF%94%E8%BC%83"><strong>8.3 販売プラットフォームの比較</strong></h2>
+<p>有料アドオンを販売する場合、どのプラットフォームを使うかも重要です。</p>
+<h3 id="831-blender-market"><strong>8.3.1 Blender Market</strong></h3>
+<ul>
+<li><strong>URL</strong>: <a href="https://blendermarket.com/">https://blendermarket.com/</a></li>
+<li><strong>特徴</strong>:
+<ul>
+<li>Blender専用のマーケット</li>
+<li>多くのユーザーが利用</li>
+<li><strong>販売手数料 30%</strong></li>
+<li>アップデート・サポートが求められる</li>
+<li>Blender開発基金の支援につながる</li>
+</ul>
+</li>
+<li><strong>おすすめのアドオン</strong>: <strong>プロ向けツール、リギング・モデリング支援</strong></li>
+</ul>
+<h3 id="832-gumroad"><strong>8.3.2 Gumroad</strong></h3>
+<ul>
+<li><strong>URL</strong>: <a href="https://gumroad.com/">https://gumroad.com/</a></li>
+<li><strong>特徴</strong>:
+<ul>
+<li>手数料が低い（8-10%）</li>
+<li><strong>価格を「0ドル以上（投げ銭）」に設定可能</strong></li>
+<li>ユーザーリストを管理できる</li>
+<li>自分でプロモーションが必要</li>
+</ul>
+</li>
+<li><strong>おすすめのアドオン</strong>: <strong>個人開発のツール、手軽な販売</strong></li>
+</ul>
+<h3 id="833-booth%E6%97%A5%E6%9C%AC%E5%90%91%E3%81%91"><strong>8.3.3 BOOTH（日本向け）</strong></h3>
+<ul>
+<li><strong>URL</strong>: <a href="https://booth.pm/">https://booth.pm/</a></li>
+<li><strong>特徴</strong>:
+<ul>
+<li><strong>日本円で販売可能</strong></li>
+<li>Pixivアカウントがあれば簡単に販売できる</li>
+<li>コンビニ決済・銀行振込対応</li>
+<li>3D系のクリエイターが多い</li>
+</ul>
+</li>
+<li><strong>おすすめのアドオン</strong>: <strong>日本人ユーザー向けのツール</strong></li>
+</ul>
+<hr>
+<h2 id="84-%E5%8A%B9%E6%9E%9C%E7%9A%84%E3%81%AA%E3%83%9E%E3%83%BC%E3%82%B1%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%88%A6%E7%95%A5"><strong>8.4 効果的なマーケティング戦略</strong></h2>
+<p>アドオンを販売するだけでは、すぐには売れません。<br>
+<strong>適切なマーケティング戦略</strong> を使うことで、多くのユーザーに知ってもらうことが重要です。</p>
+<h3 id="841-%E3%83%97%E3%83%AD%E3%83%A2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E6%96%B9%E6%B3%95"><strong>8.4.1 プロモーションの方法</strong></h3>
+<ol>
+<li><strong>デモ動画を作成（YouTube, Twitter）</strong></li>
+<li><strong>Blender Artists や Discordで宣伝</strong></li>
+<li><strong>Blender Nation に記事を投稿</strong></li>
+<li><strong>アフィリエイト（Blender Market）を活用</strong></li>
+<li><strong>期間限定セールを実施</strong></li>
+</ol>
+<hr>
+<h3 id="842-%E3%82%BB%E3%83%BC%E3%83%AB%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>8.4.2 セールの活用</strong></h3>
+<p>Blender Marketでは、<strong>ブラックフライデー</strong> や <strong>ホリデーシーズン</strong> に <strong>20-50%オフのセール</strong> を実施すると、売上が大きく伸びることが多いです。</p>
+<p><strong>例:</strong></p>
+<ul>
+<li>通常価格 $20 → セール価格 $15（25%オフ）</li>
+<li>販売数が2倍になれば、売上も増加</li>
+</ul>
+<hr>
+<h2 id="85-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%A8%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%AE%E6%A7%8B%E7%AF%89"><strong>8.5 ユーザーサポートとコミュニティの構築</strong></h2>
+<p>有料アドオンを販売するなら、<strong>サポート体制を整えることが重要</strong> です。</p>
+<h3 id="851-%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E7%A8%AE%E9%A1%9E"><strong>8.5.1 サポートの種類</strong></h3>
+<ul>
+<li><strong>GitHub Issues</strong> → バグ報告を受け付ける</li>
+<li><strong>Discordサーバーを開設</strong> → ユーザーと交流する</li>
+<li><strong>FAQ（よくある質問）を用意</strong> → 質問対応の負担を減らす</li>
+</ul>
+<p><strong>サポートをしっかりすると、高評価レビューがつきやすくなり、売上アップにつながる</strong> ので、できる範囲で対応しましょう。</p>
+<hr>
+<h2 id="86-%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%A8%E9%95%B7%E6%9C%9F%E7%9A%84%E3%81%AA%E5%8F%8E%E7%9B%8A%E5%8C%96"><strong>8.6 アップデートと長期的な収益化</strong></h2>
+<p>一度アドオンを販売したら終わりではなく、<strong>定期的にアップデートを提供することが重要</strong> です。</p>
+<h3 id="861-%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88"><strong>8.6.1 アップデートのメリット</strong></h3>
+<ul>
+<li><strong>バグ修正でユーザー満足度アップ</strong></li>
+<li><strong>新機能追加で再購入促進</strong></li>
+<li><strong>Blenderのバージョンアップに対応</strong></li>
+</ul>
+<p>例えば、バージョンを <strong>「1.0 → 1.1」</strong> にするだけでも、ユーザーに**「開発が続いている」と安心感を与えられる** ので、積極的にアップデートしましょう。</p>
+<hr>
+<h2 id="87-%E3%81%BE%E3%81%A8%E3%82%81"><strong>8.7 まとめ</strong></h2>
+<p>この章では、アドオンの収益化戦略について学びました。</p>
+<ul>
+<li><strong>無料 vs 有料アドオンの選択</strong></li>
+<li><strong>価格設定の考え方</strong></li>
+<li><strong>販売プラットフォームの比較</strong></li>
+<li><strong>マーケティング戦略とプロモーション</strong></li>
+<li><strong>サポート体制とコミュニティの構築</strong></li>
+<li><strong>アップデートと長期的な収益化</strong></li>
+</ul>
+<hr>
+<h2 id="88-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>8.8 次回予告</strong></h2>
+<p>次回は <strong>「Blenderアドオン開発の高度なテクニック」</strong> を解説します！<br>
+より複雑なアドオンの開発に挑戦してみましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC9%E7%AB%A0blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E9%AB%98%E5%BA%A6%E3%81%AA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF"><strong>第9章：Blenderアドオン開発の高度なテクニック</strong></h3>
+<p>前回は <strong>アドオンの収益化戦略</strong> について解説しました。<br>
+今回は、より高度なアドオン開発に挑戦するための <strong>テクニック</strong> を紹介します。</p>
+<p>この章では、以下の内容を学びます。</p>
+<ul>
+<li><strong>カスタム描画（OpenGL / GPU）</strong></li>
+<li><strong>Blenderの依存グラフ（Depsgraph）の活用</strong></li>
+<li><strong>非同期処理とタイマー（bpy.app.timers）</strong></li>
+<li><strong>イベントリスナーとリアルタイム更新</strong></li>
+<li><strong>スレッドを使った処理（スレッドセーフな方法）</strong></li>
+<li><strong>Blenderのファイルシステムを操作</strong></li>
+<li><strong>外部Pythonライブラリの利用</strong></li>
+</ul>
+<hr>
+<h2 id="91-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E6%8F%8F%E7%94%BBopengl--gpu"><strong>9.1 カスタム描画（OpenGL / GPU）</strong></h2>
+<p>Blenderの<strong>ビューポート上にカスタム描画</strong> するには、<code>bpy.types.SpaceView3D.draw_handler_add()</code> を使います。</p>
+<h3 id="911-%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E6%8F%8F%E7%94%BB%E4%BE%8B"><strong>9.1.1 シンプルな描画例</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+<span class="hljs-keyword">import</span> bgl
+<span class="hljs-keyword">import</span> blf
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw_callback_px</span><span class="hljs-params">(self, context)</span>:</span>
+    blf.position(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">0</span>)
+    blf.size(<span class="hljs-number">0</span>, <span class="hljs-number">20</span>, <span class="hljs-number">72</span>)
+    blf.draw(<span class="hljs-number">0</span>, <span class="hljs-string">"Hello, Blender!"</span>)
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DrawOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""ビューポートにテキストを描画"""</span>
+    bl_idname = <span class="hljs-string">"view3d.draw_text"</span>
+    bl_label = <span class="hljs-string">"ビューポート描画"</span>
+
+    _handle = <span class="hljs-literal">None</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">invoke</span><span class="hljs-params">(self, context, event)</span>:</span>
+        <span class="hljs-keyword">if</span> self._handle <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            self._handle = bpy.types.SpaceView3D.draw_handler_add(
+                draw_callback_px, (self, context), <span class="hljs-string">'WINDOW'</span>, <span class="hljs-string">'POST_PIXEL'</span>
+            )
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'RUNNING_MODAL'</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(DrawOperator)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(DrawOperator)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<p>このスクリプトを実行すると、ビューポート上に「Hello, Blender!」と表示されます。</p>
+<h3 id="912-opengl%E3%81%AE%E4%BB%A3%E6%9B%BF"><strong>9.1.2 OpenGLの代替</strong></h3>
+<p>Blender 2.8以降では、従来の <code>bgl</code> の代わりに <code>gpu</code> モジュールを使用することが推奨されています。</p>
+<hr>
+<h2 id="92-blender%E3%81%AE%E4%BE%9D%E5%AD%98%E3%82%B0%E3%83%A9%E3%83%95depsgraph%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>9.2 Blenderの依存グラフ（Depsgraph）の活用</strong></h2>
+<p><strong>Depsgraph（依存グラフ）</strong> は、Blenderのオブジェクトの状態や変更履歴を管理する仕組みです。</p>
+<h3 id="921-depsgraph%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E6%9B%B4%E6%96%B0%E6%A4%9C%E7%9F%A5"><strong>9.2.1 Depsgraphを使った更新検知</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">depsgraph_update</span><span class="hljs-params">(scene)</span>:</span>
+    print(<span class="hljs-string">"オブジェクトが変更されました"</span>)
+
+bpy.app.handlers.depsgraph_update_post.append(depsgraph_update)
+</div></code></pre>
+<p>このコードを実行すると、<strong>オブジェクトが変更されるたびにログが出力</strong> されます。</p>
+<hr>
+<h2 id="93-%E9%9D%9E%E5%90%8C%E6%9C%9F%E5%87%A6%E7%90%86%E3%81%A8%E3%82%BF%E3%82%A4%E3%83%9E%E3%83%BC"><strong>9.3 非同期処理とタイマー</strong></h2>
+<p>通常の <code>time.sleep()</code> はBlenderをフリーズさせてしまうため、<strong>非同期処理</strong> を行うには <code>bpy.app.timers</code> を使用します。</p>
+<h3 id="931-%E3%82%BF%E3%82%A4%E3%83%9E%E3%83%BC%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E9%9D%9E%E5%90%8C%E6%9C%9F%E5%87%A6%E7%90%86"><strong>9.3.1 タイマーを使った非同期処理</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_timer</span><span class="hljs-params">()</span>:</span>
+    print(<span class="hljs-string">"1秒ごとに実行"</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1.0</span>  <span class="hljs-comment"># 1秒後に再実行</span>
+
+bpy.app.timers.register(my_timer)
+</div></code></pre>
+<p>このコードを実行すると、<strong>1秒ごとにコンソールにログが表示</strong> されます。</p>
+<hr>
+<h2 id="94-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E3%81%A8%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E6%9B%B4%E6%96%B0"><strong>9.4 イベントリスナーとリアルタイム更新</strong></h2>
+<p>オブジェクトが変更されたときにリアルタイムで処理を実行する場合、イベントリスナーを活用します。</p>
+<h3 id="941-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90"><strong>9.4.1 イベントリスナーの作成</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">object_update</span><span class="hljs-params">(self, context)</span>:</span>
+    print(<span class="hljs-string">f"オブジェクトの位置が変更されました: <span class="hljs-subst">{self.location}</span>"</span>)
+
+bpy.types.Object.location = bpy.props.FloatVectorProperty(update=object_update)
+</div></code></pre>
+<p>このコードを実行すると、<strong>オブジェクトの位置が変更されるたびにログが出力</strong> されます。</p>
+<hr>
+<h2 id="95-%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%87%A6%E7%90%86"><strong>9.5 スレッドを使った処理</strong></h2>
+<p>BlenderのPythonスクリプトは基本的に <strong>シングルスレッド</strong> ですが、計算が重い処理を並行して実行することも可能です。</p>
+<h3 id="951-%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%87%A6%E7%90%86"><strong>9.5.1 スレッドを使った処理</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+<span class="hljs-keyword">import</span> threading
+<span class="hljs-keyword">import</span> time
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">heavy_computation</span><span class="hljs-params">()</span>:</span>
+    time.sleep(<span class="hljs-number">5</span>)
+    print(<span class="hljs-string">"重い計算が完了しました"</span>)
+
+thread = threading.Thread(target=heavy_computation)
+thread.start()
+</div></code></pre>
+<p>Blenderのデータ（<code>bpy.data</code> など）を<strong>別スレッドから直接変更するのはNG</strong> なので、結果はメインスレッドに戻して適用する必要があります。</p>
+<hr>
+<h2 id="96-blender%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%93%8D%E4%BD%9C"><strong>9.6 Blenderのファイルシステムを操作</strong></h2>
+<p>Blenderでは、スクリプトから <code>.blend</code> ファイルを読み書きできます。</p>
+<h3 id="961-blend-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%96%8B%E3%81%8F"><strong>9.6.1 <code>.blend</code> ファイルを開く</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+bpy.ops.wm.open_mainfile(filepath=<span class="hljs-string">"/path/to/your.blend"</span>)
+</div></code></pre>
+<h3 id="962-blend-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E4%BF%9D%E5%AD%98"><strong>9.6.2 <code>.blend</code> ファイルを保存</strong></h3>
+<pre class="hljs"><code><div>bpy.ops.wm.save_mainfile(filepath=<span class="hljs-string">"/path/to/save.blend"</span>)
+</div></code></pre>
+<h3 id="963-%E5%A4%96%E9%83%A8%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80"><strong>9.6.3 外部ファイルを読み込む</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> json
+
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"/path/to/config.json"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> f:
+    data = json.load(f)
+    print(data)
+</div></code></pre>
+<hr>
+<h2 id="97-%E5%A4%96%E9%83%A8python%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E5%88%A9%E7%94%A8"><strong>9.7 外部Pythonライブラリの利用</strong></h2>
+<p>Blenderは <strong>標準のPython環境</strong> で動作しているため、<code>pip</code> を使って外部ライブラリを導入できます。</p>
+<h3 id="971-%E5%A4%96%E9%83%A8%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"><strong>9.7.1 外部ライブラリのインストール</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> subprocess
+<span class="hljs-keyword">import</span> sys
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">install_package</span><span class="hljs-params">(package)</span>:</span>
+    subprocess.check_call([sys.executable, <span class="hljs-string">"-m"</span>, <span class="hljs-string">"pip"</span>, <span class="hljs-string">"install"</span>, package])
+
+install_package(<span class="hljs-string">"numpy"</span>)
+</div></code></pre>
+<p>このコードを実行すると、BlenderのPython環境に <code>numpy</code> がインストールされます。</p>
+<h3 id="972-numpy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E5%87%A6%E7%90%86"><strong>9.7.2 NumPyを使った処理</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+array = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+print(array * <span class="hljs-number">2</span>)
+</div></code></pre>
+<p>Blenderでのデータ処理にNumPyを活用すると、<strong>数値計算が高速化</strong> できます。</p>
+<hr>
+<h2 id="98-%E3%81%BE%E3%81%A8%E3%82%81"><strong>9.8 まとめ</strong></h2>
+<p>この章では、Blenderアドオン開発の高度なテクニックを学びました。</p>
+<ul>
+<li><strong>カスタム描画（OpenGL / GPU）</strong></li>
+<li><strong>依存グラフ（Depsgraph）の活用</strong></li>
+<li><strong>非同期処理とタイマー（bpy.app.timers）</strong></li>
+<li><strong>イベントリスナーを使ったリアルタイム更新</strong></li>
+<li><strong>スレッドを使った並列処理</strong></li>
+<li><strong>Blenderのファイル操作</strong></li>
+<li><strong>外部ライブラリの活用</strong></li>
+</ul>
+<hr>
+<h2 id="99-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>9.9 次回予告</strong></h2>
+<p>次回は <strong>「Blenderアドオン開発の最適なワークフロー」</strong> を解説します！<br>
+開発の効率を最大化する方法や、デバッグ・テストの手法を詳しく見ていきましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC10%E7%AB%A0blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E6%9C%80%E9%81%A9%E3%81%AA%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC"><strong>第10章：Blenderアドオン開発の最適なワークフロー</strong></h3>
+<p>前回は <strong>Blenderアドオン開発の高度なテクニック</strong> を学びました。<br>
+今回は、<strong>効率的な開発ワークフローとデバッグ・テストの手法</strong> を解説します。</p>
+<p>アドオン開発では、<strong>開発効率を最大化し、バグを減らすことが重要</strong> です。<br>
+適切な開発環境を整え、デバッグ・テストを行うことで、<strong>高品質なアドオンを効率的に開発</strong> できます。</p>
+<p>この章では、以下の内容を学びます。</p>
+<ul>
+<li><strong>開発環境のセットアップ</strong></li>
+<li><strong>外部エディタ（VS Code / PyCharm）の活用</strong></li>
+<li><strong>Blenderのスクリプトリロード機能</strong></li>
+<li><strong>デバッグ手法（エラーハンドリング / ログ出力）</strong></li>
+<li><strong>ユニットテストの導入</strong></li>
+<li><strong>アドオンの最適化</strong></li>
+<li><strong>コード管理（GitHub / バージョン管理）</strong></li>
+</ul>
+<hr>
+<h2 id="101-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97"><strong>10.1 開発環境のセットアップ</strong></h2>
+<p>Blenderのスクリプトエディタでもアドオン開発はできますが、<br>
+<strong>外部エディタを使用することで開発効率を大幅に向上</strong> させることができます。</p>
+<h3 id="1011-%E6%8E%A8%E5%A5%A8%E3%83%84%E3%83%BC%E3%83%AB"><strong>10.1.1 推奨ツール</strong></h3>
+<table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VS Code</strong></td>
+<td>軽量で拡張機能が豊富。おすすめの開発環境</td>
+</tr>
+<tr>
+<td><strong>PyCharm</strong></td>
+<td>高機能なPython IDE。補完機能が強力</td>
+</tr>
+<tr>
+<td><strong>GitHub</strong></td>
+<td>コードのバージョン管理に必須</td>
+</tr>
+<tr>
+<td><strong>Blender Console</strong></td>
+<td>Blender内のPythonコンソールで動作確認</td>
+</tr>
+<tr>
+<td><strong>Blender System Console</strong></td>
+<td>エラーログや <code>print()</code> の出力を確認</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="102-%E5%A4%96%E9%83%A8%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BFvs-code--pycharm%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>10.2 外部エディタ（VS Code / PyCharm）の活用</strong></h2>
+<h3 id="1021-vs-code%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97"><strong>10.2.1 VS Codeのセットアップ</strong></h3>
+<ol>
+<li><strong>VS Codeをインストール</strong>（<a href="https://code.visualstudio.com/">ダウンロード</a>）</li>
+<li><strong>「Python」拡張機能をインストール</strong></li>
+<li><strong>BlenderのPython環境を設定</strong>
+<ul>
+<li>Blenderの <code>python</code> を VS Code に認識させる</li>
+<li>例えば、Linuxの場合:<pre class="hljs"><code><div>/path/to/blender/python/bin/python3 -m pip install --upgrade pip
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li><strong>VS CodeでBlenderのスクリプトフォルダを開く</strong>
+<ul>
+<li>Blenderのアドオンフォルダに直接編集できるようにする</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="103-blender%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%83%AA%E3%83%AD%E3%83%BC%E3%83%89%E6%A9%9F%E8%83%BD"><strong>10.3 Blenderのスクリプトリロード機能</strong></h2>
+<p>Blenderでアドオンを編集するたびに <strong>Blenderを再起動するのは非効率</strong> です。<br>
+そのため、<strong>スクリプトのリロード機能</strong> を活用しましょう。</p>
+<h3 id="1031-%E6%89%8B%E5%8B%95%E3%83%AA%E3%83%AD%E3%83%BC%E3%83%89"><strong>10.3.1 手動リロード</strong></h3>
+<p>Blenderのアドオン設定画面で <strong>「アドオンを無効化 → 再度有効化」</strong> すると、スクリプトが再読み込みされます。</p>
+<h3 id="1032-%E8%87%AA%E5%8B%95%E3%83%AA%E3%83%AD%E3%83%BC%E3%83%89"><strong>10.3.2 自動リロード</strong></h3>
+<p>以下のコードを実行すると、アドオンのスクリプトを即座にリロードできます。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+bpy.ops.script.reload()
+</div></code></pre>
+<hr>
+<h2 id="104-%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E6%89%8B%E6%B3%95"><strong>10.4 デバッグ手法</strong></h2>
+<h3 id="1041-%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0"><strong>10.4.1 エラーハンドリング</strong></h3>
+<p>エラー発生時にクラッシュを防ぐため、<strong>例外処理（try-except）</strong> を適切に使いましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">try</span>:
+    obj = bpy.context.object
+    print(obj.name)
+<span class="hljs-keyword">except</span> AttributeError:
+    print(<span class="hljs-string">"オブジェクトが選択されていません"</span>)
+</div></code></pre>
+<h3 id="1042-%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B"><strong>10.4.2 ログ出力</strong></h3>
+<p>エラーメッセージや変数の値を確認するため、<strong>print() や report() を活用</strong> しましょう。</p>
+<pre class="hljs"><code><div>print(<span class="hljs-string">"デバッグメッセージ"</span>)
+bpy.context.window_manager.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"処理が完了しました"</span>)
+</div></code></pre>
+<h3 id="1043-system-console-%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>10.4.3 System Console の活用</strong></h3>
+<ul>
+<li><strong>Windows</strong>: <code>Window &gt; Toggle System Console</code></li>
+<li><strong>Mac/Linux</strong>: Blenderをターミナルから起動するとログが表示される</li>
+</ul>
+<hr>
+<h2 id="105-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E5%B0%8E%E5%85%A5"><strong>10.5 ユニットテストの導入</strong></h2>
+<p>アドオンの品質を向上させるため、<strong>ユニットテスト（自動テスト）</strong> を導入すると便利です。</p>
+<h3 id="1051-blender%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%A7%E3%83%86%E3%82%B9%E3%83%88"><strong>10.5.1 Blenderのスクリプトでテスト</strong></h3>
+<p>以下のコードは、オブジェクトの作成が正しく機能するかテストします。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_create_object</span><span class="hljs-params">()</span>:</span>
+    bpy.ops.mesh.primitive_cube_add()
+    obj = bpy.context.object
+    <span class="hljs-keyword">assert</span> obj <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>
+    <span class="hljs-keyword">assert</span> obj.type == <span class="hljs-string">'MESH'</span>
+    print(<span class="hljs-string">"テスト成功"</span>)
+
+test_create_object()
+</div></code></pre>
+<p>Pythonの <code>unittest</code> モジュールを使って <strong>テストスクリプトを実行</strong> することもできます。</p>
+<hr>
+<h2 id="106-%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E6%9C%80%E9%81%A9%E5%8C%96"><strong>10.6 アドオンの最適化</strong></h2>
+<p>Blenderアドオンは、<strong>処理の速度とメモリ使用量を最適化</strong> することが重要です。</p>
+<h3 id="1061-%E9%AB%98%E9%80%9F%E3%81%AA%E3%83%AB%E3%83%BC%E3%83%97%E5%87%A6%E7%90%86"><strong>10.6.1 高速なループ処理</strong></h3>
+<p><code>bpy.ops</code> は <strong>遅い</strong> ため、<strong>直接データを変更する方法が推奨</strong> されます。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-comment"># 遅い方法（bpy.ops）</span>
+bpy.ops.object.select_all(action=<span class="hljs-string">'SELECT'</span>)
+
+<span class="hljs-comment"># 高速な方法（直接変更）</span>
+<span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> bpy.data.objects:
+    obj.select_set(<span class="hljs-literal">True</span>)
+</div></code></pre>
+<h3 id="1062-%E3%83%A1%E3%83%A2%E3%83%AA%E7%AE%A1%E7%90%86"><strong>10.6.2 メモリ管理</strong></h3>
+<p>一時的なデータを作成したら、不要になったら削除することが重要です。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-comment"># 一時オブジェクトを作成</span>
+bpy.ops.mesh.primitive_cube_add()
+temp_obj = bpy.context.object
+
+<span class="hljs-comment"># 不要になったら削除</span>
+bpy.data.objects.remove(temp_obj)
+</div></code></pre>
+<hr>
+<h2 id="107-%E3%82%B3%E3%83%BC%E3%83%89%E7%AE%A1%E7%90%86github--%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86"><strong>10.7 コード管理（GitHub / バージョン管理）</strong></h2>
+<p>アドオンのコードを適切に管理するために、<strong>GitHubやGitを活用</strong> しましょう。</p>
+<h3 id="1071-git%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89"><strong>10.7.1 Gitの基本コマンド</strong></h3>
+<pre class="hljs"><code><div>git init  <span class="hljs-comment"># Gitリポジトリを作成</span>
+git add .  <span class="hljs-comment"># すべての変更を追加</span>
+git commit -m <span class="hljs-string">"初回コミット"</span>  <span class="hljs-comment"># コミット</span>
+git push origin main  <span class="hljs-comment"># リモートにプッシュ</span>
+</div></code></pre>
+<p>GitHubにコードをアップロードしておくと、<strong>過去のバージョンに戻せる</strong> ので安全です。</p>
+<hr>
+<h2 id="108-%E3%81%BE%E3%81%A8%E3%82%81"><strong>10.8 まとめ</strong></h2>
+<p>この章では、Blenderアドオン開発の最適なワークフローについて学びました。</p>
+<ul>
+<li><strong>VS CodeやPyCharmで効率的に開発</strong></li>
+<li><strong>Blenderのスクリプトリロード機能を活用</strong></li>
+<li><strong>エラーハンドリングとデバッグ手法</strong></li>
+<li><strong>ユニットテストを導入して品質向上</strong></li>
+<li><strong>アドオンの最適化で高速化</strong></li>
+<li><strong>GitHubを使ったバージョン管理</strong></li>
+</ul>
+<p>これらを活用することで、<strong>開発スピードを向上させ、バグの少ないアドオンを作成</strong> できます。</p>
+<hr>
+<h2 id="109-%E6%AC%A1%E5%9B%9E%E4%BA%88%E5%91%8A"><strong>10.9 次回予告</strong></h2>
+<p>次回は <strong>「Blenderアドオン開発の総まとめ」</strong> を解説します！<br>
+これまで学んだ内容を整理し、<strong>実際のプロジェクトに活かす方法</strong> を考えていきましょう！</p>
+<hr>
+<h3 id="%E7%AC%AC11%E7%AB%A0blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%AE%E7%B7%8F%E3%81%BE%E3%81%A8%E3%82%81"><strong>第11章：Blenderアドオン開発の総まとめ</strong></h3>
+<p>これまでの章では、Blenderアドオンの開発手法を <strong>基礎から高度なテクニック、配布・収益化まで</strong> 詳しく解説してきました。<br>
+この最終章では、<strong>学んだ内容を整理し、実際のプロジェクトに活かすためのロードマップ</strong> を示します。</p>
+<hr>
+<h2 id="111-%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E5%AD%A6%E3%82%93%E3%81%A0%E3%81%93%E3%81%A8%E3%81%AE%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8A"><strong>11.1 これまで学んだことの振り返り</strong></h2>
+<h3 id="1%E3%80%9C5%E7%AB%A0%E5%9F%BA%E7%A4%8E"><strong>1〜5章：基礎</strong></h3>
+<ul>
+<li><strong>アドオンの基本構造</strong>（<code>__init__.py</code> と <code>register()</code> / <code>unregister()</code>）</li>
+<li><strong>オペレーターの作成</strong>（<code>bpy.types.Operator</code> を活用）</li>
+<li><strong>パネルとメニューの追加</strong>（<code>bpy.types.Panel</code> / <code>bpy.types.Menu</code>）</li>
+<li><strong>Blenderのデータ構造とカスタムプロパティ</strong></li>
+<li><strong>Blenderのプリファレンスに設定を保存・読み込み</strong></li>
+</ul>
+<h3 id="6%E3%80%9C7%E7%AB%A0%E9%85%8D%E5%B8%83%E3%83%BB%E5%85%AC%E9%96%8B"><strong>6〜7章：配布・公開</strong></h3>
+<ul>
+<li><strong>アドオンのパッケージ化（ZIP形式）</strong></li>
+<li><strong>GitHubでの無料公開</strong></li>
+<li><strong>Blender Market / Gumroad / BOOTH での販売</strong></li>
+<li><strong>Blender公式リポジトリへの登録方法</strong></li>
+</ul>
+<h3 id="8%E3%80%9C10%E7%AB%A0%E5%8F%8E%E7%9B%8A%E5%8C%96%E3%83%BB%E9%AB%98%E5%BA%A6%E3%81%AA%E9%96%8B%E7%99%BA"><strong>8〜10章：収益化・高度な開発</strong></h3>
+<ul>
+<li><strong>有料アドオンの価格設定とマーケティング</strong></li>
+<li><strong>OpenGL / Depsgraph / 非同期処理を活用</strong></li>
+<li><strong>開発ワークフローの最適化（VS Code / GitHub / 自動リロード）</strong></li>
+</ul>
+<hr>
+<h2 id="112-%E5%AE%9F%E9%9A%9B%E3%81%AE%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%83%95%E3%83%AD%E3%83%BC"><strong>11.2 実際のアドオン開発フロー</strong></h2>
+<p>では、これまでの知識を活かして、実際の開発プロセスを整理してみましょう。</p>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%971%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%82%92%E6%B1%BA%E3%82%81%E3%82%8B"><strong>ステップ1：アイデアを決める</strong></h3>
+<p>まず、<strong>どんなアドオンを作るのかを明確にする</strong> 必要があります。</p>
+<h4 id="%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%81%AE%E5%87%BA%E3%81%97%E6%96%B9"><strong>アイデアの出し方</strong></h4>
+<ul>
+<li><strong>「普段の作業で不便だと感じること」をリストアップ</strong></li>
+<li><strong>Blenderの既存機能を強化できるポイントを探す</strong></li>
+<li><strong>他のアドオンと差別化できる要素を考える</strong></li>
+</ul>
+<p>例えば、以下のようなアイデアがあります。</p>
+<table>
+<thead>
+<tr>
+<th><strong>アドオンの種類</strong></th>
+<th><strong>ターゲットユーザー</strong></th>
+<th><strong>例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ワークフロー支援</strong></td>
+<td>一般ユーザー</td>
+<td>モデリング補助、レンダリング設定管理</td>
+</tr>
+<tr>
+<td><strong>リギングツール</strong></td>
+<td>アニメーター</td>
+<td>自動リグ、ポーズライブラリ拡張</td>
+</tr>
+<tr>
+<td><strong>VFX / シミュレーション</strong></td>
+<td>CGアーティスト</td>
+<td>カスタムパーティクル、爆発エフェクト</td>
+</tr>
+<tr>
+<td><strong>エクスポートツール</strong></td>
+<td>ゲーム開発者</td>
+<td>glTF / FBX エクスポートのカスタマイズ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%972%E3%83%97%E3%83%AD%E3%83%88%E3%82%BF%E3%82%A4%E3%83%97%E3%82%92%E4%BD%9C%E3%82%8B"><strong>ステップ2：プロトタイプを作る</strong></h3>
+<p>アイデアが決まったら、まずは <strong>最小限の機能（MVP）</strong> を作ってみましょう。</p>
+<p><strong>「いきなり完成版を目指す」のではなく、まず動くものを作る</strong> のが重要です。</p>
+<h4 id="%E3%83%97%E3%83%AD%E3%83%88%E3%82%BF%E3%82%A4%E3%83%97%E9%96%8B%E7%99%BA%E3%81%AE%E6%89%8B%E9%A0%86"><strong>プロトタイプ開発の手順</strong></h4>
+<ol>
+<li><strong>最低限のオペレーター（ボタン）を作る</strong></li>
+<li><strong>基本機能を実装</strong></li>
+<li><strong>3DビューのUIに追加</strong></li>
+<li><strong>データを保存・読み込み</strong></li>
+<li><strong>スクリプトリロードでテストしながら改善</strong></li>
+</ol>
+<p>例えば、<strong>「オブジェクトをX軸に2m移動するアドオン」</strong> なら、以下のようにシンプルなコードから始めます。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> bpy
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MoveXOperator</span><span class="hljs-params">(bpy.types.Operator)</span>:</span>
+    <span class="hljs-string">"""X軸に2m移動するオペレーター"""</span>
+    bl_idname = <span class="hljs-string">"object.move_x"</span>
+    bl_label = <span class="hljs-string">"X軸に2m移動"</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">execute</span><span class="hljs-params">(self, context)</span>:</span>
+        obj = context.object
+        <span class="hljs-keyword">if</span> obj:
+            obj.location.x += <span class="hljs-number">2</span>
+            self.report({<span class="hljs-string">'INFO'</span>}, <span class="hljs-string">"オブジェクトを移動しました"</span>)
+        <span class="hljs-keyword">else</span>:
+            self.report({<span class="hljs-string">'WARNING'</span>}, <span class="hljs-string">"オブジェクトを選択してください"</span>)
+        <span class="hljs-keyword">return</span> {<span class="hljs-string">'FINISHED'</span>}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">register</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.register_class(MoveXOperator)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unregister</span><span class="hljs-params">()</span>:</span>
+    bpy.utils.unregister_class(MoveXOperator)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    register()
+</div></code></pre>
+<hr>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%973%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E6%95%B4%E7%90%86%E3%83%BB%E6%8B%A1%E5%BC%B5"><strong>ステップ3：コードを整理・拡張</strong></h3>
+<p><strong>基本的な機能が動作するようになったら、コードを整理し、拡張します。</strong></p>
+<ul>
+<li><strong><code>operators.py</code>（オペレーター）</strong></li>
+<li><strong><code>ui.py</code>（パネル・メニュー）</strong></li>
+<li><strong><code>utils.py</code>（ヘルパー関数）</strong></li>
+<li><strong><code>preferences.py</code>（設定管理）</strong></li>
+</ul>
+<pre class="hljs"><code><div>my_addon/
+ ├── __init__.py
+ ├── operators.py
+ ├── ui.py
+ ├── preferences.py
+ ├── utils.py
+ ├── README.md
+ ├── LICENSE
+ └── example.blend
+</div></code></pre>
+<hr>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%974%E3%83%86%E3%82%B9%E3%83%88%E3%81%A8%E3%83%87%E3%83%90%E3%83%83%E3%82%B0"><strong>ステップ4：テストとデバッグ</strong></h3>
+<p><strong>開発後、以下の方法で動作を確認しましょう。</strong></p>
+<h4 id="%E6%89%8B%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88"><strong>手動テスト</strong></h4>
+<ol>
+<li><strong>Blenderのコンソールでエラーをチェック</strong></li>
+<li><strong>異常動作しないかテスト</strong></li>
+<li><strong>Blenderを再起動して設定が保存されるか確認</strong></li>
+</ol>
+<h4 id="%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%A7%E7%A2%BA%E8%AA%8D"><strong>自動テスト（スクリプトで確認）</strong></h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_move_x</span><span class="hljs-params">()</span>:</span>
+    bpy.ops.mesh.primitive_cube_add()
+    obj = bpy.context.object
+    obj.location.x = <span class="hljs-number">0</span>
+    bpy.ops.object.move_x()
+    <span class="hljs-keyword">assert</span> obj.location.x == <span class="hljs-number">2</span>
+    print(<span class="hljs-string">"テスト成功！"</span>)
+
+test_move_x()
+</div></code></pre>
+<hr>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%975%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90"><strong>ステップ5：ドキュメントを作成</strong></h3>
+<p>アドオンを配布する前に、<strong>README.md を作成して、使い方を明記</strong> しましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-section"># MyAddon</span>
+Blenderアドオン「MyAddon」は、オブジェクトをX軸に2m移動するツールです。
+
+<span class="hljs-section">## インストール方法</span>
+<span class="hljs-bullet">1. </span><span class="hljs-code">`my_addon.zip`</span> をダウンロード
+<span class="hljs-bullet">2. </span>Blenderの「プリファレンス」&gt;「アドオン」&gt;「インストール」で追加
+<span class="hljs-bullet">3. </span>「ツール」タブにボタンが追加されます
+
+<span class="hljs-section">## 使い方</span>
+<span class="hljs-bullet">- </span>3Dビューでオブジェクトを選択
+<span class="hljs-bullet">- </span>「X軸に2m移動」ボタンをクリック
+</div></code></pre>
+<hr>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%976%E9%85%8D%E5%B8%83%E3%83%BB%E8%B2%A9%E5%A3%B2"><strong>ステップ6：配布・販売</strong></h3>
+<p><strong>公開方法を選びます。</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>公開方法</strong></th>
+<th><strong>特徴</strong></th>
+<th><strong>推奨用途</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub</strong></td>
+<td>無料、オープンソース向け</td>
+<td>コミュニティ向け</td>
+</tr>
+<tr>
+<td><strong>Blender Market</strong></td>
+<td>有料販売、手数料30%</td>
+<td>高品質なアドオン</td>
+</tr>
+<tr>
+<td><strong>Gumroad</strong></td>
+<td>手数料8%、簡単に販売可能</td>
+<td>個人販売向け</td>
+</tr>
+<tr>
+<td><strong>BOOTH</strong></td>
+<td>日本向け、円で販売可能</td>
+<td>国内ユーザー向け</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%977%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%A8%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E5%AF%BE%E5%BF%9C"><strong>ステップ7：アップデートとユーザー対応</strong></h3>
+<p>アドオンは <strong>公開後も継続的に改善</strong> することが重要です。</p>
+<h4 id="%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E6%B5%81%E3%82%8C"><strong>アップデートの流れ</strong></h4>
+<ol>
+<li><strong>バグ修正・新機能追加</strong></li>
+<li><strong>GitHub / Blender Marketでアップデート</strong></li>
+<li><strong>リリースノートを公開</strong></li>
+<li><strong>ユーザーフィードバックを反映</strong></li>
+</ol>
+<hr>
+<h2 id="113-%E3%81%BE%E3%81%A8%E3%82%81"><strong>11.3 まとめ</strong></h2>
+<p>この章では、<strong>アドオン開発の流れを総まとめ</strong> しました。</p>
+<ul>
+<li><strong>アイデアを決める</strong></li>
+<li><strong>プロトタイプを作る</strong></li>
+<li><strong>コードを整理・拡張</strong></li>
+<li><strong>テスト・デバッグ</strong></li>
+<li><strong>ドキュメントを作成</strong></li>
+<li><strong>配布・販売</strong></li>
+<li><strong>アップデートとユーザー対応</strong></li>
+</ul>
+<p>この流れを参考にしながら、<strong>Blenderアドオン開発を実践</strong> してみてください！</p>
+<hr>
+<h2 id="114-%E6%9C%80%E5%BE%8C%E3%81%AB"><strong>11.4 最後に</strong></h2>
+<p>これで <strong>Blenderアドオン開発の完全ガイド</strong> が完了しました！<br>
+次は、<strong>実際にアドオンを開発・公開してみましょう！</strong> 🚀</p>
+<hr>
+<h3 id="%E7%AC%AC12%E7%AB%A0blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E9%96%8B%E7%99%BA%E3%82%92%E6%88%90%E5%8A%9F%E3%81%95%E3%81%9B%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%88%A6%E7%95%A5%E3%81%A8%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%B1%95%E6%9C%9B"><strong>第12章：Blenderアドオン開発を成功させるための戦略と今後の展望</strong></h3>
+<p>これまでの章では、Blenderアドオンの開発方法、配布、収益化、最適なワークフローについて学びました。<br>
+最終章では、<strong>アドオン開発を長期的に成功させるための戦略と、今後の展望</strong> について解説します。</p>
+<p>この章では、以下の内容を取り上げます。</p>
+<ul>
+<li><strong>Blenderアドオン市場の動向</strong></li>
+<li><strong>長期的な収益を生み出す方法</strong></li>
+<li><strong>ユーザーコミュニティの構築</strong></li>
+<li><strong>継続的なアップデートの重要性</strong></li>
+<li><strong>AIとBlenderアドオンの未来</strong></li>
+<li><strong>今後の目標設定とキャリア戦略</strong></li>
+</ul>
+<hr>
+<h2 id="121-blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E5%B8%82%E5%A0%B4%E3%81%AE%E5%8B%95%E5%90%91"><strong>12.1 Blenderアドオン市場の動向</strong></h2>
+<p>Blenderのアドオン市場は <strong>年々成長</strong> しています。<br>
+特に、プロフェッショナル向けのアドオンや作業効率を向上させるツールの需要が高まっています。</p>
+<h3 id="1211-%E3%81%A9%E3%82%93%E3%81%AA%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%8C%E5%A3%B2%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%8B"><strong>12.1.1 どんなアドオンが売れているのか？</strong></h3>
+<p>Blender Market や Gumroad で人気のアドオンを分析すると、以下のカテゴリが特に注目されています。</p>
+<table>
+<thead>
+<tr>
+<th><strong>カテゴリ</strong></th>
+<th><strong>例</strong></th>
+<th><strong>価格帯</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>モデリングツール</strong></td>
+<td>HardOps, BoxCutter</td>
+<td>$10〜$50</td>
+</tr>
+<tr>
+<td><strong>アニメーション支援</strong></td>
+<td>Auto-Rig Pro</td>
+<td>$20〜$100</td>
+</tr>
+<tr>
+<td><strong>レンダリング補助</strong></td>
+<td>EEVEE Ultimate Shader Pack</td>
+<td>$10〜$40</td>
+</tr>
+<tr>
+<td><strong>ゲーム開発向け</strong></td>
+<td>glTF Exporter</td>
+<td>$15〜$50</td>
+</tr>
+<tr>
+<td><strong>ワークフロー自動化</strong></td>
+<td>SimpleBake, SpeedRetopo</td>
+<td>$20〜$80</td>
+</tr>
+</tbody>
+</table>
+<p>Blenderの進化に伴い、新しいツールの需要が生まれています。<br>
+<strong>市場のニーズを調査し、独自の価値を持つアドオンを開発することが成功のカギ</strong> になります。</p>
+<hr>
+<h2 id="122-%E9%95%B7%E6%9C%9F%E7%9A%84%E3%81%AA%E5%8F%8E%E7%9B%8A%E3%82%92%E7%94%9F%E3%81%BF%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95"><strong>12.2 長期的な収益を生み出す方法</strong></h2>
+<p>アドオンを1つ開発して終わりではなく、<strong>長期的に収益を生み出す仕組み</strong> を作ることが重要です。</p>
+<h3 id="1221-%E7%B6%99%E7%B6%9A%E7%9A%84%E3%81%AA%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88"><strong>12.2.1 継続的なアップデート</strong></h3>
+<ul>
+<li>定期的に新機能を追加し、<strong>ユーザーに価値を提供し続ける</strong></li>
+<li>Blenderのアップデートに対応し、常に動作する状態を維持</li>
+</ul>
+<h3 id="1222-%E6%9C%89%E6%96%99%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%A8%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF"><strong>12.2.2 有料アップデートと拡張パック</strong></h3>
+<ul>
+<li>基本機能を <strong>$10〜$30</strong> で提供し、<strong>高度な機能は別売り（$50〜$100）</strong></li>
+<li>「無料アドオン＋プレミアム版（Pro）」という形も有効</li>
+</ul>
+<h3 id="1223-%E6%9C%88%E9%A1%8D%E8%AA%B2%E9%87%91%E3%83%A2%E3%83%87%E3%83%AB%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3"><strong>12.2.3 月額課金モデル（サブスクリプション）</strong></h3>
+<ul>
+<li>PatreonやFanboxを活用し、<strong>毎月の収益を安定化</strong></li>
+<li>アドオンの定期アップデートや限定コンテンツを提供</li>
+</ul>
+<hr>
+<h2 id="123-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%AE%E6%A7%8B%E7%AF%89"><strong>12.3 ユーザーコミュニティの構築</strong></h2>
+<p>成功しているアドオン開発者は、<strong>コミュニティを大切にしている</strong> ことが共通しています。</p>
+<h3 id="1231-discord%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AE%E6%B4%BB%E7%94%A8"><strong>12.3.1 Discordサーバーの活用</strong></h3>
+<ul>
+<li>ユーザー同士が交流できる場を提供する</li>
+<li>バグ報告やフィードバックを直接受け取れる</li>
+</ul>
+<h3 id="1232-sns%E3%81%A7%E3%81%AE%E6%83%85%E5%A0%B1%E7%99%BA%E4%BF%A1"><strong>12.3.2 SNSでの情報発信</strong></h3>
+<ul>
+<li><strong>Twitter, YouTube, Blender Artists でアドオンを宣伝</strong></li>
+<li>チュートリアル動画を作成し、<strong>アドオンの価値を伝える</strong></li>
+</ul>
+<h3 id="1233-%E7%84%A1%E6%96%99%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%82%82%E5%A4%A7%E5%88%87%E3%81%AB%E3%81%99%E3%82%8B"><strong>12.3.3 無料ユーザーも大切にする</strong></h3>
+<ul>
+<li>無料アドオンを配布し、<strong>ブランド認知度を上げる</strong></li>
+<li>一部機能を有料化することで収益を確保</li>
+</ul>
+<hr>
+<h2 id="124-%E7%B6%99%E7%B6%9A%E7%9A%84%E3%81%AA%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E3%81%AE%E9%87%8D%E8%A6%81%E6%80%A7"><strong>12.4 継続的なアップデートの重要性</strong></h2>
+<h3 id="1241-blender%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E5%AF%BE%E5%BF%9C"><strong>12.4.1 Blenderのバージョンアップ対応</strong></h3>
+<ul>
+<li><strong>Blender 3.x → 4.x</strong> では、APIの変更が発生するため、<strong>定期的なメンテナンスが必要</strong></li>
+<li>事前に <strong>Blenderの開発版（Alpha, Beta）</strong> をチェックし、動作確認</li>
+</ul>
+<h3 id="1242-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%8B%E3%82%89%E3%81%AE%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF%E3%82%92%E6%B4%BB%E7%94%A8"><strong>12.4.2 ユーザーからのフィードバックを活用</strong></h3>
+<ul>
+<li>GitHub Issues や Blender Market のレビューを参考に機能改善</li>
+<li><strong>「ユーザーが欲しい機能」を取り入れることで、売上を伸ばせる</strong></li>
+</ul>
+<hr>
+<h2 id="125-ai%E3%81%A8blender%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3%E3%81%AE%E6%9C%AA%E6%9D%A5"><strong>12.5 AIとBlenderアドオンの未来</strong></h2>
+<p>最近では、AI技術を活用したアドオンも登場しています。</p>
+<h3 id="1251-ai%E3%82%92%E6%B4%BB%E7%94%A8%E3%81%97%E3%81%9F%E6%96%B0%E3%81%97%E3%81%84%E3%82%A2%E3%83%89%E3%82%AA%E3%83%B3"><strong>12.5.1 AIを活用した新しいアドオン</strong></h3>
+<ul>
+<li><strong>AIによるモデリング支援</strong></li>
+<li><strong>画像から3Dメッシュを自動生成</strong></li>
+<li><strong>AIリギングアシスタント</strong></li>
+</ul>
+<h3 id="1252-comfyui-%E3%82%84-controlnet-%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA"><strong>12.5.2 ComfyUI や ControlNet との連携</strong></h3>
+<ul>
+<li><strong>AI画像生成（Stable Diffusion）とBlenderの連携</strong></li>
+<li><strong>AIによるマテリアル自動生成</strong></li>
+</ul>
+<p>今後、<strong>AI技術を取り入れたアドオン開発が大きなトレンド</strong> になる可能性があります。</p>
+<hr>
+<h2 id="126-%E4%BB%8A%E5%BE%8C%E3%81%AE%E7%9B%AE%E6%A8%99%E8%A8%AD%E5%AE%9A%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E6%88%A6%E7%95%A5"><strong>12.6 今後の目標設定とキャリア戦略</strong></h2>
+<p>アドオン開発を続けることで、<strong>個人のキャリアにも大きな影響を与える</strong> ことができます。</p>
+<h3 id="1261-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B9%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E6%B4%BB%E5%8B%95"><strong>12.6.1 フリーランスとしての活動</strong></h3>
+<ul>
+<li><strong>オリジナルアドオンの販売で生計を立てる</strong></li>
+<li><strong>企業向けにカスタムアドオンを開発する</strong></li>
+<li><strong>YouTube / Udemy でアドオン開発講座を展開</strong></li>
+</ul>
+<h3 id="1262-%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%BBvfx%E6%A5%AD%E7%95%8C%E3%81%B8%E3%81%AE%E5%B1%95%E9%96%8B"><strong>12.6.2 ゲーム・VFX業界への展開</strong></h3>
+<ul>
+<li><strong>Blenderを活用するゲームスタジオ向けにツール開発</strong></li>
+<li><strong>映画・アニメーション制作のワークフロー改善</strong></li>
+</ul>
+<h3 id="1263-%E8%87%AA%E5%88%86%E3%81%A0%E3%81%91%E3%81%AE%E3%83%96%E3%83%A9%E3%83%B3%E3%83%89%E3%82%92%E4%BD%9C%E3%82%8B"><strong>12.6.3 自分だけのブランドを作る</strong></h3>
+<ul>
+<li><strong>「このアドオンといえば○○さん！」というブランドを確立</strong></li>
+<li><strong>オリジナルキャラクターやIPと組み合わせてアドオンを展開</strong></li>
+</ul>
+<p>Blenderアドオン開発は、単なる趣味にとどまらず、<strong>収益を生み出すビジネスやキャリアの武器になる</strong> 可能性を秘めています。</p>
+<hr>
+<h2 id="127-%E3%81%BE%E3%81%A8%E3%82%81"><strong>12.7 まとめ</strong></h2>
+<p>この章では、Blenderアドオン開発を成功させるための戦略と、今後の展望について解説しました。</p>
+<ul>
+<li><strong>Blenderアドオン市場は成長中！</strong></li>
+<li><strong>長期的な収益を生み出すためには、定期的なアップデートが重要</strong></li>
+<li><strong>ユーザーコミュニティを構築し、フィードバックを活用</strong></li>
+<li><strong>AI技術を取り入れることで、新しい可能性が広がる</strong></li>
+<li><strong>アドオン開発は、フリーランスや業界へのキャリアにつながる</strong></li>
+</ul>
+<hr>
+<h2 id="128-%E6%9C%80%E5%BE%8C%E3%81%AB"><strong>12.8 最後に</strong></h2>
+<p>これで <strong>Blenderアドオン開発の完全ガイド</strong> が完結しました！🎉</p>
+<p>ここまでの知識を活かして、<strong>自分だけのアドオンを開発し、世界中のBlenderユーザーに届けましょう！</strong> 🚀</p>
+<p>Blenderの可能性は無限大です。<br>
+今こそ、あなたのアイデアを形にする時です！💡✨</p>
+
+</body>
+</html>
